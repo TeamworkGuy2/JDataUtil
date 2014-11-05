@@ -4,6 +4,7 @@ JavaMortar
 Boilerplate code commonly used in small Java applications. Includes array searching and aggregation, primitive/tri/quad Functions, string searching, splitting, and replacing, char conditions and ranges, and builders for maps, lists, etc...
 
 Packages:
+
 checks/ - methods for assertions and checks for conformance of methods like equals(), hashCode(), etc...
 
 dataType/ - data type enums and data type converters
