@@ -142,4 +142,13 @@ public final class CharRangeSearcherMutable implements CharRangeSearcher {
 		return this;
 	}
 
+
+	private final boolean doRangesOverlap(int start1, int end1, int start2, int end2) {
+		if(start1 < end1 || start2 < end2) {
+			throw new IllegalArgumentException("range overlap check, range end is less than range start, " +
+					"start1='" + start1 + "' end1='" + end1 + "', start2='" + start2 + " end2='" + end2);
+		}
+		return !(start1 > end2) && !(end1 < start2);
+	}
+
 }

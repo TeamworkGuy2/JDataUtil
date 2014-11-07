@@ -3,7 +3,6 @@ package dataType;
 import dataCollections.IntListDefault;
 
 /** A {@link CharSearcher} that contains a set of chars to compare input characters to.
- * TODO do not allow duplicate chars
  * @author TeamworkGuy2
  * @since 2014-11-1
  */
@@ -17,6 +16,9 @@ public final class CharSearcherMutable implements CharSearcher {
 		if(cs != null) {
 			this.chars = new IntListDefault(cs.length);
 			for(char c : cs) {
+				if(this.chars.indexOf(c) > -1) {
+					throw new IllegalArgumentException("duplicate searcher char '" + c + "'");
+				}
 				this.chars.add(c);
 			}
 		}
@@ -68,6 +70,9 @@ public final class CharSearcherMutable implements CharSearcher {
 
 	public void addChar(int ch) {
 		checkLocked();
+		if(chars.indexOf(ch) > -1) {
+			throw new IllegalArgumentException("duplicate searcher char '" + ch + "'");
+		}
 		chars.add(ch);
 	}
 
