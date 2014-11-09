@@ -5,6 +5,8 @@ Boilerplate code commonly used in small Java applications. Includes array search
 
 Packages:
 
+annotation/ - basic annotations that Java lacks, such as Immutable and NotNull
+
 checks/ - methods for assertions and checks for conformance of methods like equals(), hashCode(), etc...
 
 dataType/ - data type enums and data type converters

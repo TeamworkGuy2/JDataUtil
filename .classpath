@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/TeamworkGuy2/Documents/Java/Libraries/data-collection-util/jar/data_collection_util.jar" sourcepath="C:/Users/TeamworkGuy2/Documents/Java/Projects/DataStructures/src">
+		<attributes>
+			<attribute name="javadoc_location" value="file://C:/Users/TeamworkGuy2/Documents/Java/Libraries/data-collection-util/doc"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
