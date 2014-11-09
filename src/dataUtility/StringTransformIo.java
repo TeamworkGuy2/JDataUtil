@@ -24,7 +24,7 @@ public final class StringTransformIo {
 	public static final char escapeStart = '\\';
 
 
-	private StringTransformIo() { throw new AssertionError("cannot instantiate StringUtility"); }
+	private StringTransformIo() { throw new AssertionError("cannot instantiate static class StringUtility"); }
 
 
 	/** A slightly faster version of {@link String#split(String)} that does not

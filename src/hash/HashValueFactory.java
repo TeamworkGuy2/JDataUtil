@@ -1,8 +1,3 @@
-/** Author: Benjamin Vanluven
- * CIS 4361 - Secure Operating Systems
- * Spring 2014
- * Purpose: Integrity checker & secure file shredder
- */
 package hash;
 
 import java.io.File;
@@ -20,8 +15,7 @@ import java.util.EnumMap;
  */
 public final class HashValueFactory {
 	private static final int BUFFER_SIZE = 24576;
-	private static EnumMap<HashAlgorithm, HashValueFactory> algorithmHashFactories =
-			new EnumMap<HashAlgorithm, HashValueFactory>(HashAlgorithm.class);
+	private static EnumMap<HashAlgorithm, HashValueFactory> algorithmHashFactories = new EnumMap<>(HashAlgorithm.class);
 
 	private HashAlgorithm algorithm;
 	private MessageDigest digest;

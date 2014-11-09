@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import checks.Check;
+import dataCollections.IntListDefault;
+import dataType.CharRangeSearcherMutable;
+import dataUtility.ListUtil;
 import dataUtility.StringIndex;
 import dataUtility.StringReplace;
 import dataUtility.StringTransformIo;
@@ -37,6 +40,59 @@ public class StringAndArrayTests {
 			System.out.println(Arrays.toString(StringTransformIo.split(match, "//", 5)));
 			System.out.println(Arrays.toString(match.split("//", 5)));
 		}
+	}
+
+
+	public static void charSearchRangeTest() {
+		int[] duplicateRanges = new int[] {
+				1, 2,
+				3, 5,
+				3, 5,
+				1, 2,
+				3, 5,
+		};
+		IntListDefault duplicateRangeList = new IntListDefault(duplicateRanges, 0, duplicateRanges.length);
+		System.out.println("with duplicate ranges:\t\t" + duplicateRangeList);
+		CharRangeSearcherMutable.checkForDuplicateRanges(duplicateRangeList, true, false);
+		System.out.println("removed duplicate ranges:\t" + duplicateRangeList);
+
+		int[][] ranges = new int[][] {
+				{ 1, 4, 3, 6 },
+				{ 1, 7, 3, 6 },
+				{ 1, 2, 3, 6 },
+				{ 3, 6, 6, 7 },
+				{ 1, 2, 3, 3 },
+				{ 3, 3, 2, 4 },
+		};
+		// expected range overlap values
+		Boolean[] expectedOverlap = new Boolean[] { true, true, false, true, false, true };
+		// expected range overlap counts
+		Integer[] expectedOverlapCount = new Integer[] { 2, 4, 0, 1, 0, 1 };
+		for(int i = 0, size = ranges.length; i < size; i ++) {
+			System.out.println("range [" + ranges[i][0] + ", " + ranges[i][1] +
+					"], to [" + ranges[i][2] + ", " + ranges[i][3] + "], overlap: " +
+					CharRangeSearcherMutable.doRangesOverlap(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]) +
+					", count: " + CharRangeSearcherMutable.rangeOverlapCount(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]));
+		}
+
+		Check.checkTests(ranges, expectedOverlap, "", "",
+				(range) -> CharRangeSearcherMutable.doRangesOverlap(range[0], range[1], range[2], range[3]));
+		Check.checkTests(ranges, expectedOverlapCount, "", "",
+				(range) -> CharRangeSearcherMutable.rangeOverlapCount(range[0], range[1], range[2], range[3]));
+	}
+
+
+	public static void listUtilAddTest() {
+		@SuppressWarnings("unchecked")
+		List<String>[] lists = new List[] {
+				Arrays.asList("a", "unique", "list"),
+				Arrays.asList("list", "non", "unique", "list"),
+				Arrays.asList(""),
+				Arrays.asList(),
+		};
+		Boolean[] expect = new Boolean[] { true, false, true, true };
+
+		Check.checkTests(lists, expect, "", "", (list) -> ListUtil.isUnique(list));
 	}
 
 
@@ -126,7 +182,9 @@ public class StringAndArrayTests {
 
 	public static void main(String[] args) {
 		//stringReplaceTest();
-		indexOfNotPrefixedByTest();
+		//charSearchRangeTest();
+		listUtilAddTest();
+		//indexOfNotPrefixedByTest();
 		//stringUtilTest();
 		//arrayUtilTest();
 	}

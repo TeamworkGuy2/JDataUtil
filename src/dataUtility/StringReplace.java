@@ -9,7 +9,7 @@ import java.util.RandomAccess;
 
 import num.ArrayUtil;
 
-/**
+/** Utility methods for replacing portions of a string
  * @author TeamworkGuy2
  * @since 2014-10-18
  */
@@ -21,8 +21,12 @@ public final class StringReplace {
 	public static char[] escapeChars = new char[] {'\t', '\b', '\n', '\r', '\f', '\'', '\"', '\\'};
 
 
+	private StringReplace() { throw new AssertionError("cannot instantiate static class StringReplace"); }
+
+
 	/** Replace escape literals in a string with their character equivalents.
-	 * Escape literals are strings like "\n", "\t", etc.
+	 * Escape literals are characters from the {@link #escapeIdentifiers} list,
+	 * like "\n", "\t", etc.
 	 * @param str the string to replace escape literals in
 	 * @return the result of replacing escape literals in {@code str} with the escape literals values,
 	 * for example "\n" is replaced with a single newline character

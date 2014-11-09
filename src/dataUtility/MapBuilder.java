@@ -10,12 +10,21 @@ import java.util.Map;
  */
 public final class MapBuilder {
 
+	/** Creates an immutable map containing the list of entries
+	 * @param entries the list entries to include in the map
+	 * @return a new, immutable, map containing the list of input entries
+	 * @see #newImmutable(java.util.Map.Entry...)
+	 */
 	@SafeVarargs
 	public static final <K, V> Map<K, V> of(Map.Entry<K, V>... entries) {
 		return newImmutable(entries);
 	}
 
 
+	/** Creates an immutable map containing the list of entries
+	 * @param entries the list entries to include in the map
+	 * @return a new, immutable, map containing the list of input entries
+	 */
 	@SafeVarargs
 	public static final <K, V> Map<K, V> newImmutable(Map.Entry<K, V>... entries) {
 		Map<K, V> entryMap = new HashMap<>();
@@ -26,6 +35,10 @@ public final class MapBuilder {
 	}
 
 
+	/** Creates a mutable map containing the list of entries
+	 * @param entries the list entries to include in the map
+	 * @return a new, mutable, map containing the list of input entries
+	 */
 	@SafeVarargs
 	public static final <K, V> Map<K, V> newMutable(Map.Entry<K, V>... entries) {
 		Map<K, V> entryMap = new HashMap<>();

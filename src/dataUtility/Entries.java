@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
-/** A utility to reduce boiler plate code for {@link java.util.Map.Entry Map.Entry}
+/** A utility for working with {@link java.util.Map.Entry Map.Entry}
  * @author TeamworkGuy2
  * @since 2014-4-5
  */

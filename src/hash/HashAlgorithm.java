@@ -1,8 +1,3 @@
-/** Author: Benjamin Vanluven
- * CIS 4361 - Secure Operating Systems
- * Spring 2014
- * Purpose: Integrity checker & secure file shredder
- */
 package hash;
 
 /** Common cryptographic hashing algorithms
@@ -20,6 +15,9 @@ public enum HashAlgorithm {
 	private final String name;
 
 
+	/** Create a {@link HashAlgorithm} enum instance
+	 * @param name the name of the hash algorithm
+	 */
 	private HashAlgorithm(String name) {
 		this.name = name;
 	}

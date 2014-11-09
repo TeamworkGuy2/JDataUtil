@@ -3,13 +3,14 @@ package dataUtility;
 import java.util.List;
 import java.util.RandomAccess;
 
-/**
+/** Utility methods for finding the index of a specific character, string, or value
+ * within a string
  * @author TeamworkGuy2
  * @since 2014-10-24
  */
 public final class StringIndex {
 
-	private StringIndex() { throw new AssertionError("cannot instantiate StringIndex"); }
+	private StringIndex() { throw new AssertionError("cannot instantiate static class StringIndex"); }
 
 
 	/** Search for a character in an array of characters and return the absolute index
@@ -39,6 +40,12 @@ public final class StringIndex {
 	}
 
 
+	/** Search for the index of a supplementary character in an array of characters
+	 * @param str the array of characters to search
+	 * @param strOff the offset into {@code str} at which to start comparing characters
+	 * @param matchChar the supplementary characters to search for
+	 * @return the lower index within the {@code str} array of the matching {@code matchChar}
+	 */
 	private static final int indexOfSupplement(char[] str, int strOff, int matchChar) {
 		if(Character.isValidCodePoint(matchChar)) {
 			final char high = Character.highSurrogate(matchChar);

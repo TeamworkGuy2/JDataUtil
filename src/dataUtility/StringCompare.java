@@ -14,8 +14,16 @@ import java.util.Map;
  * @author TeamworkGuy2
  * @since 2014-11-3
  */
-public class StringCompare {
+public final class StringCompare {
 
+	private StringCompare() { throw new AssertionError("cannot instantiate StringCompare"); }
+
+
+	/** Check if the specified string starts with any of a set of prefixes
+	 * @param str the main string to compare prefixes to
+	 * @param prefixes the set of prefixes to compare to the beginning of {@code str}
+	 * @return true if {@code str} starts with any one of the {@code prefixes}
+	 */
 	public static final boolean startsWith(String str, String... prefixes) {
 		if(prefixes != null) {
 			for(String prefix : prefixes) {
@@ -28,6 +36,11 @@ public class StringCompare {
 	}
 
 
+	/** Check if the specified string ends with any of a set of suffixes
+	 * @param str the main string to compare suffixes to
+	 * @param suffixes the set of suffixes to compare to the end of {@code str}
+	 * @return true if {@code str} ends with any one of the {@code suffixes}
+	 */
 	public static final boolean endsWith(String str, String... suffixes) {
 		if(suffixes != null) {
 			for(String suffix : suffixes) {
