@@ -17,7 +17,7 @@ public final class StringReplace {
 	public static final String escapeStartStr = "\\";
 	/** the valid escape characters that can come after a '\', other than unicode escape sequences */
 	public static char[] escapeIdentifiers = new char[] {'t', 'b', 'n', 'r', 'f', '\'', '\"', '\\'};
-	/** the escape characters created by the escape sequences in {@link CharLiteral#escapeIdentifiers} */
+	/** the escape characters created by the escape sequences in {@link StringReplace#escapeIdentifiers} */
 	public static char[] escapeChars = new char[] {'\t', '\b', '\n', '\r', '\f', '\'', '\"', '\\'};
 
 
@@ -205,11 +205,8 @@ public final class StringReplace {
 	 * Differs from {@link #replaceStrings} by doing a binary search of the tokens, and replacing the closest match
 	 * rather than simply replacing {@code tokens} sequentially.
 	 * @param str the string to search and replace tokens in
-	 * @param comparator the {@link Comparator} to use to sort the {@code tokens} map entry array
-	 * @param tokens a list of {@link Map#Entry Map.Entries}, the keys are the strings to
+	 * @param tokens a list of {@link java.util.Map.Entry Map.Entries}, the keys are the strings to
 	 * search for and the values are the strings to replace found keys with
-	 * @param preserveOrder true if the {@code tokens} entry array's order should be preserved, false will
-	 * cause this method to sort the {@code tokens} array by natural string order
 	 * @param isSorted true if the {@code tokens} entry array is sorted, false if it is not
 	 * @return the resulting string with matching tokens replaced
 	 */
@@ -226,8 +223,7 @@ public final class StringReplace {
 	 * Differs from {@link #replaceStrings} by doing a binary search of the tokens, and replacing the closest match
 	 * rather than simply replacing {@code tokens} sequentially.
 	 * @param str the string to search and replace tokens in
-	 * @param comparator the {@link Comparator} to use to sort the {@code tokens} map entry array
-	 * @param tokens a list of {@link Map#Entry Map.Entries}, the keys are the strings to
+	 * @param tokens a list of {@link java.util.Map.Entry Map.Entries}, the keys are the strings to
 	 * search for and the values are the strings to replace found keys with
 	 * @param isSorted true if the {@code tokens} entry array is sorted, false if it is not
 	 * @param preserveOrder true if the {@code tokens} entry array's order should be preserved, false will
@@ -248,7 +244,7 @@ public final class StringReplace {
 	 * rather than simply replacing {@code tokens} sequentially.
 	 * @param str the string to search and replace tokens in
 	 * @param comparator the {@link Comparator} to use to sort the {@code tokens} map entry array
-	 * @param tokens a list of {@link Map#Entry Map.Entries}, the keys are the strings to
+	 * @param tokens a list of {@link java.util.Map.Entry Map.Entries}, the keys are the strings to
 	 * search for and the values are the strings to replace found keys with
 	 * @param isSorted true if the {@code tokens} entry array is sorted, false if it is not
 	 * @param preserveOrder true if the {@code tokens} entry array's order should be preserved, false will

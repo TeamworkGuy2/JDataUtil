@@ -37,7 +37,7 @@ public class PropertyMap {
 
 	/** Return a subset of this property map containing only the used properties in this map.
 	 * A used property is a property that has been requested via a get or set method,
-	 * for example {@link #getStringProperty(String)} or {@link #getSetIntProperty(String, int)}, etc.
+	 * for example {@link #accessString(String, String)} or {@link #accessInt(String, int)}, etc.
 	 * @return a subset map of all of the used properties in this object's properties map. 
 	 */
 	public Map<String, String> getUsedProperties() {

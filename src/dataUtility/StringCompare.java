@@ -79,14 +79,14 @@ public final class StringCompare {
 
 	/** Returns true if any of the list of strings starts with {@code strBldr}
 	 * @param strs the list of strings, the start of each is compared to {@code strBldr}
-	 * @param strBldr the string builder contents to compare to the start of each string
+	 * @param strBuilder the string builder contents to compare to the start of each string
 	 * in {@code strs}
 	 * @return true if any of the strings in {@code strs} starts with the contents of {@code strBldr},
 	 * false if none of the strings start with {@code strBldr}
 	 */
-	public static final boolean searchStartsWith(List<String> str, StringBuilder strBuilder) {
-		for(int strI = 0, len = str.size(); strI < len; strI++) {
-			if(compareStartsWith(str.get(strI), strBuilder, 0) == 0) {
+	public static final boolean searchStartsWith(List<String> strs, StringBuilder strBuilder) {
+		for(int strI = 0, len = strs.size(); strI < len; strI++) {
+			if(compareStartsWith(strs.get(strI), strBuilder, 0) == 0) {
 				return true;
 			}
 		}
@@ -197,7 +197,7 @@ public final class StringCompare {
 	 * @param chseq the char sequence to find a string that matches
 	 * @param chseqOffset the offset into {@code chseq} at which to beginning searching
 	 * for a matching string
-	 * @param searchStrs an array of {@link Map#Entry Map.Entries}, search the keys for
+	 * @param searchStrs an array of {@link java.util.Map.Entry Map.Entries}, search the keys for
 	 * a match to {@code chseq}
 	 * @param isSorted true if {@code searchStrs} is sorted (use binary search to find match),
 	 * false if {@code searchStrs} is not sorted and each entry's key should be compared to {@code chseq}

@@ -330,18 +330,18 @@ public final class StringIndex {
 	}
 
 
-	/** Returns the list index of the string that starts with {@code strBldr}
-	 * @param strs the list of strings, the start of each is compared to {@code strBldr}
-	 * @param strBldr the string builder contents to compare to the start of each string
+	/** Returns the list index of the string that starts with {@code strBuilder}
+	 * @param strs the list of strings, the start of each is compared to {@code strBuilder}
+	 * @param strBuilder the string builder contents to compare to the start of each string
 	 * in {@code strs}
-	 * @param strBldrOffset the offset into the string builder's contents at which to start
+	 * @param offsetStrB the offset into the string builder's contents at which to start
 	 * comparing characters to strings from {@code strs}
 	 * @return the {@code str} index of the string that starts with the contents of {@code strBldr},
-	 * -1 if none of the strings start with {@code strBldr}
+	 * -1 if none of the strings start with {@code strBuilder}
 	 */
-	public static final int startsWithIndex(List<String> str, StringBuilder strBuilder, int offsetStrB) {
-		for(int strI = 0, len = str.size(); strI < len; strI++) {
-			if(StringCompare.compareStartsWith(str.get(strI), strBuilder, offsetStrB) == 0) {
+	public static final int startsWithIndex(List<String> strs, StringBuilder strBuilder, int offsetStrB) {
+		for(int strI = 0, len = strs.size(); strI < len; strI++) {
+			if(StringCompare.compareStartsWith(strs.get(strI), strBuilder, offsetStrB) == 0) {
 				return strI;
 			}
 		}

@@ -87,7 +87,7 @@ public final class StringTransformIo {
 	/** A slightly faster version of {@link String#split(String)} that does not
 	 * used {@link Pattern}, instead the pattern is interpreted literally
 	 * and the input string is split based on the literal split string.<br/>
-	 * This method is more space efficient than the {@link StringUtility#split(String, String, int)} version
+	 * This method is more space efficient than the {@link StringTransformIo#split(String, String, int)} version
 	 * since no internal structure is created to store the split strings, instead the array provided
 	 * is filled with the split strings.
 	 * @param input the input char sequence to split
@@ -301,7 +301,7 @@ public final class StringTransformIo {
 	}
 
 
-	/** Check for a common prefix among the keys an array of {@link Map#Entry} values
+	/** Check for a common prefix among the keys an array of {@link java.util.Map.Entry Map.Entry} values
 	 * @param offset the offset into each key string to start comparing values
 	 * @param strs an array of map entries to compare the keys of
 	 * @return the common string prefix of all of the map entry keys
@@ -373,7 +373,7 @@ public final class StringTransformIo {
 
 	/** Find a common suffix of an array of strings, for example, if:
 	 * {@code strs = ["jumping", "swimming", "laughing"]}, the returned prefix would be {@code "ing"}
-	 * @param stringOffset the offset from the end of each string at which to start searching for a common suffix
+	 * @param offset the offset from the end of each string at which to start searching for a common suffix
 	 * @param strs the array of strings to search
 	 * @return the common suffix shared by all the strings searched or an empty
 	 * string if there is no common suffix

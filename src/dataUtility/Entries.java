@@ -77,10 +77,9 @@ public final class Entries {
 	}
 
 
-	/** Carry out a binary search on the keys in an array of {@link Map#Entry Map.Entries}
+	/** Carry out a binary search on the keys in an array of {@link java.util.Map.Entry Map.Entries}
 	 * @param a the map entry array to search
 	 * @param key the key to search for
-	 * @param c the comparator to compare keys
 	 * @return the index of the matching key or {@code -(expected index) - 1} if the key
 	 * was not found in the array
 	 * @see Arrays#binarySearch(Object[], Object, Comparator)
@@ -108,7 +107,7 @@ public final class Entries {
 	}
 
 
-	/** Carry out a binary search on the keys in an array of {@link Map#Entry Map.Entries}
+	/** Carry out a binary search on the keys in an array of {@link java.util.Map.Entry Map.Entries}
 	 * @param a the map entry array to search
 	 * @param key the key to search for
 	 * @param c the comparator to compare keys
@@ -139,10 +138,9 @@ public final class Entries {
 	}
 
 
-	/** Carry out a binary search on the values in an array of {@link Map#Entry Map.Entries}
+	/** Carry out a binary search on the values in an array of {@link java.util.Map.Entry Map.Entries}
 	 * @param a the map entry array to search
 	 * @param value the value to search for
-	 * @param c the comparator to compare values
 	 * @return the index of the matching values or {@code -(expected index) - 1} if the value
 	 * was not found in the array
 	 * @see Arrays#binarySearch(Object[], Object, Comparator)
@@ -170,7 +168,7 @@ public final class Entries {
 	}
 
 
-	/** Carry out a binary search on the values in an array of {@link Map#Entry Map.Entries}
+	/** Carry out a binary search on the values in an array of {@link java.util.Map.Entry Map.Entries}
 	 * @param a the map entry array to search
 	 * @param value the value to search for
 	 * @param c the comparator to compare values

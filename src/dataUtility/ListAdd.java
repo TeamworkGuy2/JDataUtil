@@ -20,7 +20,7 @@ public final class ListAdd {
 	 * @param ary
 	 * @param dst
 	 * @param condition
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 * @see #addArrayToList(Object[], List, boolean, boolean, boolean, boolean)
 	 */
 	public static final <T> boolean addArrayToList(T[] ary, List<? super T> dst, AddCondition condition) {
@@ -33,7 +33,7 @@ public final class ListAdd {
 	 * @param list
 	 * @param dst
 	 * @param condition
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 * @see #addListToList(List, List, boolean, boolean, boolean, boolean)
 	 */
 	public static final <T> boolean addListToList(List<T> list, List<? super T> dst, AddCondition condition) {
@@ -46,7 +46,7 @@ public final class ListAdd {
 	 * @param collection
 	 * @param dst
 	 * @param condition
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 * @see #addCollectionToList(Collection, List, boolean, boolean, boolean, boolean)
 	 */
 	public static final <T> boolean addCollectionToList(Collection<T> collection, List<? super T> dst, AddCondition condition) {
@@ -61,7 +61,7 @@ public final class ListAdd {
 	 * @param addIfContains true to add all of {@code ary} items, even if they exist in the list,
 	 * false to only add items that do not exist in the list as defined by {@link List#contains(Object)}
 	 * @param addIfNull true to add any item, false to not add null items
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 */
 	public static final <T> boolean addArrayToList(T[] ary, List<? super T> dst, boolean addIfContains,
 			boolean errorIfContains, boolean addIfNull, boolean errorIfNull) {
@@ -97,7 +97,7 @@ public final class ListAdd {
 	 * @param addIfContains true to add all of {@code list} items, even if they exist in the list,
 	 * false to only add items that do not exist in the list as defined by {@link List#contains(Object)}
 	 * @param addIfNull true to add any item, false to not add null items
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 */
 	public static final <T> boolean addListToList(List<? extends T> list, List<? super T> dst, boolean addIfContains,
 			boolean errorIfContains, boolean addIfNull, boolean errorIfNull) {
@@ -154,7 +154,7 @@ public final class ListAdd {
 	 * @param addIfContains true to add all of {@code collection} items, even if they exist in the list,
 	 * false to only add items that do not exist in the list as defined by {@link List#contains(Object)}
 	 * @param addIfNull true to add any item, false to not add null items
-	 * @return
+	 * @return true if the value was added successfully, false otherwise
 	 */
 	public static final <T> boolean addCollectionToList(Collection<? extends T> collection, List<? super T> dst,
 			boolean addIfContains, boolean errorIfContains, boolean addIfNull, boolean errorIfNull) {
