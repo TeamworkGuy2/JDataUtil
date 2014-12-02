@@ -1,7 +1,9 @@
 package dataUtility;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /** Utility methods and fields for date and time formatting<br>
@@ -11,8 +13,9 @@ import java.util.Locale;
  * @since 2014-6-2
  */
 public final class DateTimeConverter {
-	public static final SimpleDateFormat ISO_8601_DATE_FORMATER = new SimpleDateFormat("yyyy-MM-dd");
-	public static final SimpleDateFormat ISO_8601_DATE_TIME_FORMATER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+	public static final SimpleDateFormat ISO_8601_DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat ISO_8601_DATE_TIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+	public static final SimpleDateFormat RFC_822_FORMATTER = new SimpleDateFormat("E, W MMM y H:m:s z");
 
 
 	/** Convert a calendar date into a string as specified by http://tools.ietf.org/html/rfc822#section-5.1
@@ -20,7 +23,9 @@ public final class DateTimeConverter {
 	 * @param locale the locale to use when outputting strings such as a day of the week, or month of the year.
 	 * @return a string in the format: "day_abbreviation, day_of_month month_abbreviation year hour:minute:second GMT"
 	 */
-	public static final String convertDateToStringRfc822(Calendar date, Locale locale) {
+	private static final String convertDateToStringRfc822(Calendar date, Locale locale) {
+		Date a = Date.from(Instant.now());
+		a.toString();
 		int day = date.get(Calendar.DAY_OF_MONTH);
 		int hour = date.get(Calendar.HOUR_OF_DAY);
 		int minute = date.get(Calendar.MINUTE);

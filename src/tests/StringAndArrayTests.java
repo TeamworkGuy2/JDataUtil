@@ -1,5 +1,6 @@
 package tests;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -175,15 +176,36 @@ public class StringAndArrayTests {
 	}
 
 
+	public static void commonPrefixSuffixTest() {
+		// prefix
+		{
+			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
+			String[] expect = new String[] { "", "a_b", "this", "" };
+
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringTransformIo.commonPrefix(0, strSet));
+		}
+		// suffix
+		{
+			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
+			String[] expect = new String[] { "", "", "that", "c" };
+
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringTransformIo.commonSuffix(0, strSet));
+		}
+	}
+
+
 	public static void arrayUtilTest() {
 		;
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		//stringReplaceTest();
 		//charSearchRangeTest();
-		listUtilAddTest();
+		DateTimeTest.formatParseDateTimeTest();
+		//commonPrefixSuffixTest();
+		//listUtilAddTest();
+
 		//indexOfNotPrefixedByTest();
 		//stringUtilTest();
 		//arrayUtilTest();
