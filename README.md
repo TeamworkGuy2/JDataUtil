@@ -5,20 +5,26 @@ Boilerplate code commonly used in small Java applications. Includes array search
 
 Packages:
 
-annotation/ - basic annotations that Java lacks, such as Immutable and NotNull
+####annotation/
+basic annotations that Java lacks, such as Immutable and NotNull
 
-checks/ - methods for assertions and checks for conformance of methods like equals(), hashCode(), etc...
+####checks/
+methods for assertions and checks for conformance of methods like equals(), hashCode(), etc...
 
-dataType/ - data type enums and data type converters
+####dataType/
+data type enums and data type converters
 
-dataUtility/ - specialized string indexOf, comparison, replace, and transformation methods; property file 
+####dataUtility/
+specialized string indexOf, comparison, replace, and transformation methods; property file loading/storage; builders for Map.Entry, Map, List, Set, etc...
 
-loading/storage; builders for Map.Entry, Map, List, Set, etc...
+####functionUtils/
+functions that take a primitive and return a boolean, as well as Tri-Function and Consumer
 
-functionUtils/ - functions that take a primitive and return a boolean, as well as Tri-Function and Consumer
+####hash/
+methods for creating cryptographic hash values for byte arrays, strings, etc... using common hash algorithms
 
-hash/ - methods for creating hash values for byte arrays, strings, etc... using common hash algorithms
+####num/
+array manipulation methods such as concat, indexOf, sum, average, etc.
 
-num/ - array manipulation methods such as concat, indexOf, sum, average, etc.
-
-tests/ - basic tests and example code
+####tests/
+basic tests and example code
