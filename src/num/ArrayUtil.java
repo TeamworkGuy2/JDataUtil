@@ -364,6 +364,15 @@ public final class ArrayUtil {
 	}
 
 
+	/** The average of an array
+	 * @param values the array of values to average
+	 * @return the average of the array
+	 */
+	public static float avg(int[] values) {
+		return avg(values, 0, values.length);
+	}
+
+
 	/** The average of a subset of an array
 	 * @param values the array of values to average
 	 * @param offset the offset into the array at which to start averaging values
@@ -416,7 +425,7 @@ public final class ArrayUtil {
 	 * @param ary the array of floats to sum
 	 * @return the sum of all of the elements in the specified array
 	 */
-	public static final int sum(float[] ary) {
+	public static final float sum(float[] ary) {
 		return sum(ary, 0, ary.length);
 	}
 
@@ -428,9 +437,9 @@ public final class ArrayUtil {
 	 * at {@code offset}
 	 * @return the sum of the specified array subset
 	 */
-	public static final int sum(float[] ary, final int offset, final int length) {
+	public static final float sum(float[] ary, final int offset, final int length) {
 		int offLen = offset+length;
-		int sum = 0;
+		float sum = 0;
 		for(int i = 0; i < offLen; i++) {
 			sum += ary[i];
 		}
@@ -465,6 +474,15 @@ public final class ArrayUtil {
 	}
 
 
+	/** The average of an array
+	 * @param values the array of values to average
+	 * @return the average of the array
+	 */
+	public static float avg(float[] values) {
+		return avg(values, 0, values.length);
+	}
+
+
 	/** The average of a subset of an array
 	 * @param values the array of values to average
 	 * @param offset the offset into the array at which to start averaging values
@@ -472,7 +490,7 @@ public final class ArrayUtil {
 	 * @return the average of the array subset specified
 	 */
 	public static float avg(float[] values, int offset, int length) {
-		int total = 0;
+		float total = 0;
 		int offsetLength = offset+length;
 		for(int i = offset; i < offsetLength; i++) {
 			total += values[i];

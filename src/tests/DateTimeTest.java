@@ -17,8 +17,12 @@ public class DateTimeTest {
 	public static void formatParseDateTimeTest() throws ParseException {
 		Date now = Date.from(Instant.now());
 		Date[] dates = new Date[] { Date.from(Instant.now()), new Date((long)(Math.random() * 1_000_000_000_000L)) };
-		SimpleDateFormat[] formatters = new SimpleDateFormat[] { DateTimeConverter.ISO_8601_DATE_FORMATTER,
-				DateTimeConverter.ISO_8601_DATE_TIME_FORMATTER, DateTimeConverter.RFC_822_FORMATTER };
+		DateTimeConverter dateFormatter = DateTimeConverter.getDefaultInstance();
+		SimpleDateFormat[] formatters = new SimpleDateFormat[] {
+				dateFormatter.getIso8601DateFormatter(),
+				dateFormatter.getIso8601DateTimeFormatter(),
+				dateFormatter.getRfc822Formatter()
+		};
 		String[] formatterNames = new String[] { "ISO 8601 Date", "ISO 8601 Date/Time", "RFC 822" };
 
 		for(Date date : dates) {
