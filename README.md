@@ -8,6 +8,9 @@ Packages:
 ####annotation/
 basic annotations that Java lacks, such as Immutable and NotNull
 
+####arrayUtils/
+array manipulation methods such as concat, indexOf, sum, average, min, max, etc.
+
 ####checks/
 methods for assertions and checks for conformance of methods like equals(), hashCode(), etc...
 
@@ -15,16 +18,22 @@ methods for assertions and checks for conformance of methods like equals(), hash
 data type enums and data type converters
 
 ####dataUtility/
-specialized string indexOf, comparison, replace, and transformation methods; property file loading/storage; builders for Map.Entry, Map, List, Set, etc...
+builders for Map.Entry, Map, List, Set, etc. Also conversion of property-file style strings
 
 ####functionUtils/
 functions that take a primitive and return a boolean, as well as Tri-Function and Consumer
 
 ####hash/
-methods for creating cryptographic hash values for byte arrays, strings, etc... using common hash algorithms
+methods for creating cryptographic hash values for byte arrays, strings, etc. using common hash algorithms
 
-####num/
-array manipulation methods such as concat, indexOf, sum, average, etc.
+####numeric/
+specific numeric functions used by some previous projects
+
+####ranges/
+Classes for representing, searching, and manipulating integer and char ranges
+
+####stringUtils
+string indexOf, comparison, replace, and transformation methods
 
 ####tests/
 basic tests and example code
