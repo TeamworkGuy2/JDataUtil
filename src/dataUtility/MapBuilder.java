@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/** A utility class for {@link Map Maps}
+/** A utility class for building {@link Map Maps}
  * @author TeamworkGuy2
  * @since 2014-10-31
  */

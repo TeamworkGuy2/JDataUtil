@@ -12,7 +12,7 @@ import java.util.RandomAccess;
 public final class ListUtil {
 
 
-	private ListUtil() { throw new AssertionError("cannot instantiate ListUtil"); }
+	private ListUtil() { throw new AssertionError("cannot instantiate static class ListUtil"); }
 
 
 	/** Check whether a list contains unique values as defined by {@link Object#equals(Object)}

@@ -6,14 +6,14 @@ import java.util.RandomAccess;
 
 import dataType.AddCondition;
 
-/** A set of utility methods to add {@link Collection collections}, {@link List lists}, or
+/** A set of methods to add {@link Collection collections}, {@link List lists}, or
  * {@code arrays} to a list
  * @author TeamworkGuy2
  * @since 2014-11-8
  */
 public final class ListAdd {
 
-	private ListAdd() { throw new AssertionError("cannot instantiate ListAdd"); }
+	private ListAdd() { throw new AssertionError("cannot instantiate static class ListAdd"); }
 
 
 	/**
@@ -49,7 +49,8 @@ public final class ListAdd {
 	 * @return true if the value was added successfully, false otherwise
 	 * @see #addCollectionToList(Collection, List, boolean, boolean, boolean, boolean)
 	 */
-	public static final <T> boolean addCollectionToList(Collection<T> collection, List<? super T> dst, AddCondition condition) {
+	public static final <T> boolean addCollectionToList(Collection<T> collection, List<? super T> dst,
+			AddCondition condition) {
 		return addCollectionToList(collection, dst, condition.doAddIfContains(), condition.doErrorIfContains(),
 				condition.doAddIfNull(), condition.doErrorIfNull());
 	}
@@ -65,11 +66,27 @@ public final class ListAdd {
 	 */
 	public static final <T> boolean addArrayToList(T[] ary, List<? super T> dst, boolean addIfContains,
 			boolean errorIfContains, boolean addIfNull, boolean errorIfNull) {
+		return addArrayToList(ary, 0, ary.length, dst, addIfContains, errorIfContains, addIfNull, errorIfNull);
+	}
+
+
+	/**
+	 * @param ary the array of values to add to the specified list
+	 * @param off the offset into {@code ary} at which to start adding items to the {@code dst} list
+	 * @param len the number of items to add to {@code dst} from {@code ary}
+	 * @param dst list the list to add the items to
+	 * @param addIfContains true to add all of {@code ary} items, even if they exist in the list,
+	 * false to only add items that do not exist in the list as defined by {@link List#contains(Object)}
+	 * @param addIfNull true to add any item, false to not add null items
+	 * @return true if the value was added successfully, false otherwise
+	 */
+	public static final <T> boolean addArrayToList(T[] ary, int off, int len, List<? super T> dst,
+			boolean addIfContains, boolean errorIfContains, boolean addIfNull, boolean errorIfNull) {
 		if(ary == null) {
 			return false;
 		}
 		boolean result = true;
-		for(int i = 0, size = ary.length; i < size; i++) {
+		for(int i = off, size = off + len; i < size; i++) {
 			T item = ary[i];
 			if(!addIfNull && item == null) {
 				if(errorIfNull) {

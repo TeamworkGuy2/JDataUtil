@@ -98,7 +98,8 @@ public final class DateTimeConverter {
 	 * @param locale the locale to use when outputting strings such as a day of the week, or month of the year.
 	 * @return a string in the format: "day_abbreviation, day_of_month month_abbreviation year hour:minute:second GMT"
 	 */
-	private static final String convertDateToStringRfc822(Calendar date, Locale locale) {
+	// package-private - unused
+	static final String convertDateToStringRfc822(Calendar date, Locale locale) {
 		Date a = Date.from(Instant.now());
 		a.toString();
 		int day = date.get(Calendar.DAY_OF_MONTH);

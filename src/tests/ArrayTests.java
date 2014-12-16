@@ -1,6 +1,6 @@
 package tests;
 
-import num.ArrayUtil;
+import arrayUtils.ArrayUtil;
 import checks.Check;
 
 /**

@@ -15,7 +15,6 @@ public class DateTimeTest {
 
 
 	public static void formatParseDateTimeTest() throws ParseException {
-		Date now = Date.from(Instant.now());
 		Date[] dates = new Date[] { Date.from(Instant.now()), new Date((long)(Math.random() * 1_000_000_000_000L)) };
 		DateTimeConverter dateFormatter = DateTimeConverter.getDefaultInstance();
 		SimpleDateFormat[] formatters = new SimpleDateFormat[] {
@@ -37,6 +36,5 @@ public class DateTimeTest {
 			System.out.println();
 		}
 	}
-
 
 }

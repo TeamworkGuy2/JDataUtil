@@ -1,5 +1,6 @@
 package checks;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /** Static methods for checking type, bounds, and other requirements
@@ -141,6 +142,47 @@ public final class Check {
 	}
 
 
+	/**
+	 * @param task the action to perform
+	 * @param throwIfNoError true to throw an error if {@code task} does not
+	 * throw an {@code Exception}
+	 * @return true if the task did not throw an error, false if it did not throw an error
+	 */
+	public static final boolean handleException(boolean throwIfNoError, Runnable task) {
+		Throwable error = null;
+		try {
+			task.run();
+		} catch(Exception e) {
+			error = e;
+		} finally {
+			if(throwIfNoError && error == null) {
+				throw new Error("task was expected to throw error but did not");
+			}
+		}
+		return error == null;
+	}
+
+
+	/**
+	 * @param task the action to perform
+	 * @param throwIfNoError true to throw an error if {@code task} does not
+	 * throw a {@code Throwable}
+	 * @return true if the task did not throw an error, false if it did not throw an error
+	 */
+	public static final void handleThrowable(boolean throwIfNoError, Runnable task) {
+		Throwable error = null;
+		try {
+			task.run();
+		} catch(Throwable e) {
+			error = e;
+		} finally {
+			if(throwIfNoError && error == null) {
+				throw new Error("task was expected to throw error but did not");
+			}
+		}
+	}
+
+
 	/** Run a series of tests against a set of inputs and expected results.
 	 * Each input is converted to a result via a function and the result is compared
 	 * to the expected result using {@link #equals(Object)}
@@ -154,18 +196,43 @@ public final class Check {
 	 */
 	public static final <T, R> void checkTests(T[] inputs, R[] expected, String perCheckMessage, String errorMessage,
 			Function<T, R> action) {
-		if(inputs.length != expected.length) {
-			throw new IllegalArgumentException("inputs (length: " + inputs.length + ") should be equal in length to (length: " + expected.length + ")");
-		}
+		expectLength(inputs.length, expected.length);
+
 		for(int i = 0, size = inputs.length; i < size; i++) {
 			R res = action.apply(inputs[i]);
 			if(!res.equals(expected[i])) {
-				throw new Error(errorMessage + ", input: '" + res + "' does not match expected: '" + expected[i] + "'");
+				throw new Error(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
+						expected[i] + "'");
 			}
 			else if(perCheckMessage != null) {
-				System.out.println(perCheckMessage + "input: '" + res + "' to: '" + expected[i] + "'");
+				System.out.println(perCheckMessage + "input " + i + ": '" + res + "' to: '" + expected[i] + "'");
 			}
 		}
+	}
+
+
+	public static final <T, R> void checkTests(T[] inputs, R[] expected, String perCheckMessage, String errorMessage,
+			BiFunction<T, Integer, R> action) {
+		expectLength(inputs.length, expected.length);
+
+		for(int i = 0, size = inputs.length; i < size; i++) {
+			R res = action.apply(inputs[i], i);
+			if(!res.equals(expected[i])) {
+				throw new Error(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
+						expected[i] + "'");
+			}
+			else if(perCheckMessage != null) {
+				System.out.println(perCheckMessage + "input " + i + ": '" + res + "' to: '" + expected[i] + "'");
+			}
+		}
+	}
+
+
+	private static final void expectLength(int len1, int len2) {
+		if(len1 != len2) {
+			throw new IllegalArgumentException("inputs (length: " + len1 + ") should be equal in length to (length: " + len2 + ")");
+		}
+
 	}
 
 }

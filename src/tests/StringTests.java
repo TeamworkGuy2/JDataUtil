@@ -1,16 +1,15 @@
 package tests;
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
+import ranges.Ranges;
+import stringUtils.StringIndex;
+import stringUtils.StringModify;
+import stringUtils.StringReplace;
 import checks.Check;
-import dataCollections.IntListDefault;
-import dataType.CharRangeSearcherMutable;
+import dataCollections.IntArrayList;
 import dataUtility.ListUtil;
-import dataUtility.StringIndex;
-import dataUtility.StringReplace;
-import dataUtility.StringTransformIo;
 
 /**
  * @author TeamworkGuy2
@@ -38,7 +37,7 @@ public class StringTests {
 				"5//",
 		};
 		for(String match : matches) {
-			System.out.println(Arrays.toString(StringTransformIo.split(match, "//", 5)));
+			System.out.println(Arrays.toString(StringModify.split(match, "//", 5)));
 			System.out.println(Arrays.toString(match.split("//", 5)));
 		}
 	}
@@ -52,9 +51,9 @@ public class StringTests {
 				1, 2,
 				3, 5,
 		};
-		IntListDefault duplicateRangeList = new IntListDefault(duplicateRanges, 0, duplicateRanges.length);
+		IntArrayList duplicateRangeList = new IntArrayList(duplicateRanges, 0, duplicateRanges.length);
 		System.out.println("with duplicate ranges:\t\t" + duplicateRangeList);
-		CharRangeSearcherMutable.checkForDuplicateRanges(duplicateRangeList, true, false);
+		Ranges.throwIfDuplicateRanges(duplicateRangeList);
 		System.out.println("removed duplicate ranges:\t" + duplicateRangeList);
 
 		int[][] ranges = new int[][] {
@@ -72,14 +71,14 @@ public class StringTests {
 		for(int i = 0, size = ranges.length; i < size; i ++) {
 			System.out.println("range [" + ranges[i][0] + ", " + ranges[i][1] +
 					"], to [" + ranges[i][2] + ", " + ranges[i][3] + "], overlap: " +
-					CharRangeSearcherMutable.doRangesOverlap(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]) +
-					", count: " + CharRangeSearcherMutable.rangeOverlapCount(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]));
+					Ranges.doRangesOverlap(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]) +
+					", count: " + Ranges.rangeOverlapCount(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]));
 		}
 
 		Check.checkTests(ranges, expectedOverlap, "", "",
-				(range) -> CharRangeSearcherMutable.doRangesOverlap(range[0], range[1], range[2], range[3]));
+				(range) -> Ranges.doRangesOverlap(range[0], range[1], range[2], range[3]));
 		Check.checkTests(ranges, expectedOverlapCount, "", "",
-				(range) -> CharRangeSearcherMutable.rangeOverlapCount(range[0], range[1], range[2], range[3]));
+				(range) -> Ranges.rangeOverlapCount(range[0], range[1], range[2], range[3]));
 	}
 
 
@@ -150,6 +149,15 @@ public class StringTests {
 	}
 
 
+	public static void stringJoin() {
+		String[][] strs = new String[][] { { "Aa", "Bb" }, { "123", "_", ".." }, { "", "" }, { "" } };
+		String[] delimiters = new String[] { "-", "||", "=", "=" };
+		String[] expect = new String[] { "Aa-Bb", "123||_||..", "=", "" };
+
+		Check.checkTests(strs, expect, "", "", (s, i) -> StringModify.join(s, delimiters[i]));
+	}
+
+
 	public static void stringReplaceTest() {
 		{
 			String[] strs = new String[] { 	"&amp; with &lt; or &gt;",	"*** or ** * ***",	"***",	"*** a six***seven***" };
@@ -182,35 +190,20 @@ public class StringTests {
 			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
 			String[] expect = new String[] { "", "a_b", "this", "" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringTransformIo.commonPrefix(0, strSet));
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringModify.commonPrefix(0, strSet));
 		}
 		// suffix
 		{
 			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
 			String[] expect = new String[] { "", "", "that", "c" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringTransformIo.commonSuffix(0, strSet));
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringModify.commonSuffix(0, strSet));
 		}
 	}
 
 
 	public static void arrayUtilTest() {
 		;
-	}
-
-
-	public static void main(String[] args) throws ParseException {
-		ArrayTests.testArraySums();
-		ArrayTests.testArrayAvg();
-		//stringReplaceTest();
-		//charSearchRangeTest();
-		DateTimeTest.formatParseDateTimeTest();
-		//commonPrefixSuffixTest();
-		//listUtilAddTest();
-
-		//indexOfNotPrefixedByTest();
-		//stringUtilTest();
-		//arrayUtilTest();
 	}
 
 }
