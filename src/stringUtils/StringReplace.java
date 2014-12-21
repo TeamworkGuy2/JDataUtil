@@ -299,7 +299,7 @@ public final class StringReplace {
 		}
 
 		StringBuilder result = new StringBuilder(str);
-		String prefix = StringModify.commonPrefix(0, tokens);
+		String prefix = StringCommonality.findPrefix(0, tokens);
 		if(prefix.length() > 0) {
 			int index = result.indexOf(prefix, 0);
 			while(index > -1) {

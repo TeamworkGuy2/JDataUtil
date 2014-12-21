@@ -21,10 +21,4 @@ public interface IntSearcher {
 	 */
 	public int indexOfMatch(int val);
 
-
-	/**
-	 * @return the number of integer sub ranges in this IntSearcher
-	 */
-	public int size();
-
 }

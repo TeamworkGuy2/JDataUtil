@@ -24,7 +24,9 @@ public interface CharRangeSearcher extends CharRange, CharSearcher {
 	public int getUpperBound(int ch);
 
 
-	@Override
+	/**
+	 * @return the number of char sub ranges in this CharRangeSearcher
+	 */
 	public int size();
 
 }

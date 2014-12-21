@@ -41,7 +41,6 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	@Override
 	public int size() {
 		return chars.size() + ranges.size();
 	}

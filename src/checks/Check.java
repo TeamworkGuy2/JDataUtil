@@ -183,7 +183,7 @@ public final class Check {
 	}
 
 
-	/** Run a series of tests against a set of inputs and expected results.
+	/** Run a series of test against a set of inputs and expected results.
 	 * Each input is converted to a result via a function and the result is compared
 	 * to the expected result using {@link #equals(Object)}
 	 * @param inputs the array of inputs to process

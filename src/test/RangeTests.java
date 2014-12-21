@@ -1,10 +1,10 @@
-package tests;
+package test;
 
-import checks.Check;
+import primitiveCollections.IntArrayList;
+import primitiveCollections.IntList;
 import ranges.IntRangeSearcherMutable;
 import ranges.IntRangeSearcherMutableImpl;
-import dataCollections.IntArrayList;
-import dataCollections.IntList;
+import checks.Check;
 
 /**
  * @author TeamworkGuy2

@@ -1,7 +1,7 @@
 package ranges;
 
-import dataCollections.IntArrayList;
-import dataCollections.IntList;
+import primitiveCollections.IntArrayList;
+import primitiveCollections.IntList;
 
 /** Methods for checking if integer ranges overlap, contain a value, or adding/merging
  * overlapping ranges.

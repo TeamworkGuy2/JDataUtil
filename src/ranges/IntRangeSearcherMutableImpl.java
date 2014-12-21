@@ -1,7 +1,7 @@
 package ranges;
 
-import dataCollections.IntArrayList;
-import dataCollections.IntList;
+import primitiveCollections.IntArrayList;
+import primitiveCollections.IntList;
 
 
 /**

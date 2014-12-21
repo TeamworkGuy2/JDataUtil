@@ -24,7 +24,9 @@ public interface IntRangeSearcher extends IntRange, IntSearcher {
 	public abstract int getUpperBound(int i);
 
 
-	@Override
-	public abstract int size();
+	/**
+	 * @return the number of integer sub ranges in this IntRangeSearcher
+	 */
+	public int size();
 
 }

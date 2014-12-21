@@ -1,14 +1,19 @@
-package tests;
+package test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import primitiveCollections.IntArrayList;
 import ranges.Ranges;
+import stringUtils.StringCommonality;
+import stringUtils.StringConvert;
 import stringUtils.StringIndex;
 import stringUtils.StringModify;
 import stringUtils.StringReplace;
 import checks.Check;
-import dataCollections.IntArrayList;
 import dataUtility.ListUtil;
 
 /**
@@ -17,10 +22,25 @@ import dataUtility.ListUtil;
  */
 public class StringTests {
 
-	public static void stringUtilTest() {
+	@Test
+	public void testEscapeUnescape() {
+		String src = "a \\\"block\\\" char '\\\"'";
+		StringBuilder strDst = new StringBuilder();
+		StringConvert.unwrapChar(src, 0, '\\', '"', strDst);
+		String unwrapped = strDst.toString();
+		Assert.assertTrue("a \"block\" char '\"'".equals(unwrapped));
+
+		strDst.setLength(0);
+		StringConvert.wrapChar(unwrapped, '\\', '"', (char)0, strDst);
+		String wrapped = strDst.toString();
+		Assert.assertTrue(src.equals(wrapped));
+	}
+
+
+	@Test
+	public void stringUtilTest() {
 		String str = StringReplace.replaceEscapeLiterals("kd\\t\\nwith\\\\and \\\"\\f\\\'");
-		if(!str.equals("kd\t\nwith\\and \"\f\'")) { throw new Error("replace escape literals: " + str); }
-		System.out.println("replace escape literals: " + str);
+		Assert.assertTrue("replace escape literals: " + str, str.equals("kd\t\nwith\\and \"\f\'"));
 	}
 
 
@@ -190,14 +210,14 @@ public class StringTests {
 			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
 			String[] expect = new String[] { "", "a_b", "this", "" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringModify.commonPrefix(0, strSet));
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringCommonality.findPrefix(0, strSet));
 		}
 		// suffix
 		{
 			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
 			String[] expect = new String[] { "", "", "that", "c" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringModify.commonSuffix(0, strSet));
+			Check.checkTests(strs, expect, "", "", (strSet) -> StringCommonality.findSuffix(0, strSet));
 		}
 	}
 

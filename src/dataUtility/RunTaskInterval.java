@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author TeamworkGuy2
  * @since 2014-12-15
  */
-public final class RunTaskInterval {
+public final class RunTaskInterval implements Runnable {
 	/** The weight used when recalculating the average run time based on
 	 * the previous run times and the newest run time */
 	private static final float AVERAGE_NEW_WEIGHT = 0.25f;
@@ -97,16 +97,16 @@ public final class RunTaskInterval {
 	/** Calculate if the internal task should be run based on past update
 	 * times and the current {@link System#nanoTime()} to match the requested frequency.
 	 */
-	public void updateRollingAvg() {
-		updateRollingAvg(System.nanoTime());
+	public void run() {
+		updateTaskTime(System.nanoTime());
 	}
 
 
-	/** Calculate if the internal task should be run based on past update
-	 * times and the provided time to match the requested frequency.
-	 * @param timeNano the current time in nano seconds
+	/** Calculate if the task should be run based on past update times and
+	 * the provided time to match the requested frequency.
+	 * @param timeNano the current time in nanoseconds
 	 */
-	public void updateRollingAvg(long timeNano) {
+	public void updateTaskTime(long timeNano) {
 		long sinceLastUpdateNano = (timeNano - lastUpdateNano);
 		// Number of nanoseconds until task should run.
 		// Positive values are in the future, negative values are in the past

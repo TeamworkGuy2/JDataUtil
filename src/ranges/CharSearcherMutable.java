@@ -1,6 +1,6 @@
 package ranges;
 
-import dataCollections.IntArrayList;
+import primitiveCollections.IntArrayList;
 
 
 /** A {@link CharSearcher} that contains a set of chars to compare input characters to.
@@ -60,7 +60,6 @@ public final class CharSearcherMutable implements CharSearcher {
 	}
 
 
-	@Override
 	public int size() {
 		return chars.size();
 	}
