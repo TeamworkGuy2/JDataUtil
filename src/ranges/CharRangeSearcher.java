@@ -9,24 +9,22 @@ package ranges;
 public interface CharRangeSearcher extends CharRange, CharSearcher {
 
 	@Override
-	public boolean isMatch(int ch);
+	public boolean isMatch(char val);
 
 
 	@Override
-	public int indexOfMatch(int ch);
+	public int indexOfMatch(char val);
 
 
 	@Override
-	public int getLowerBound(int ch);
+	public char getLowerBound(int i);
 
 
 	@Override
-	public int getUpperBound(int ch);
+	public char getUpperBound(int i);
 
 
-	/**
-	 * @return the number of char sub ranges in this CharRangeSearcher
-	 */
+	@Override
 	public int size();
 
 }

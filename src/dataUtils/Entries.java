@@ -1,4 +1,4 @@
-package dataUtility;
+package dataUtils;
 
 import java.util.AbstractMap;
 import java.util.Arrays;

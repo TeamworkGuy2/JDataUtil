@@ -1,18 +1,19 @@
-package ranges;
+TRangeSearcherMutable(var) ::= <<
+package $var.packageName$;
 
-/** A mutable {@link IntRangeSearcher} that allows for the addition and removal of ranges.<br>
+/** A mutable {@link $var.implementClassNames$} that allows for the addition and removal of ranges.<br>
  * 
  * @author TeamworkGuy2
  * @since 2014-12-13
  */
-public interface IntRangeSearcherMutable extends IntRangeSearcher {
+public interface $var.className$ extends $var.implementClassNames:{x | $x$}; separator=", "$ {
 
 
 	/** Add a range to this set of ranges
 	 * @param start the inclusive start of the range
 	 * @param end the inclusive end of the range
 	 */
-	public void addRange(int start, int end);
+	public void addRange($var.type$ start, $var.type$ end);
 
 
 	/** Remove the specified range
@@ -27,19 +28,21 @@ public interface IntRangeSearcherMutable extends IntRangeSearcher {
 	 * @param end the inclusive end of the range
 	 * @return true if an equal range was found and successfully removed, false if not
 	 */
-	public boolean removeEqualRange(int start, int end);
+	public boolean removeEqualRange($var.type$ start, $var.type$ end);
 
 
 	/** Remove any portions of existing ranges that include the specified range
 	 * @param start the inclusive start of the range
 	 * @param end the inclusive end of the range
 	 */
-	public void removeRange(int start, int end);
+	public void removeRange($var.type$ start, $var.type$ end);
 
 
-	/** Create an immutable copy of this int range set
-	 * @return an immutable copy of this int range set
+	/** Create an immutable copy of this $var.type$ range set
+	 * @return an immutable copy of this $var.type$ range set
 	 */
-	public IntRangeSearcher toImmutable();
+	public $var.immutableClassName$ toImmutable();
 
 }
+
+>>

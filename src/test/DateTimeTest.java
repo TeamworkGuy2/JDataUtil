@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
-import dataUtility.DateTimeConverter;
+import dataUtils.DateTimeConverter;
 
 /**
  * @author TeamworkGuy2

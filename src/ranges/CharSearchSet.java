@@ -18,13 +18,13 @@ public final class CharSearchSet implements CharSearcher {
 
 
 	@Override
-	public boolean isMatch(int ch) {
+	public boolean isMatch(char ch) {
 		return chars.isMatch(ch) || ranges.isMatch(ch);
 	}
 
 
 	@Override
-	public int indexOfMatch(int ch) {
+	public int indexOfMatch(char ch) {
 		int index = chars.indexOfMatch(ch);
 		if(index > -1) {
 			return index;
@@ -100,7 +100,7 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public IntSearcher toImmutable() {
+	public CharSearcher toImmutable() {
 		this.setLocked(true);
 		return this;
 	}

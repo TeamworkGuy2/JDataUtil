@@ -13,20 +13,18 @@ public interface IntRangeSearcher extends IntRange, IntSearcher {
 
 
 	@Override
-	public abstract int indexOfMatch(int val);
+	public int indexOfMatch(int val);
 
 
 	@Override
-	public abstract int getLowerBound(int i);
+	public int getLowerBound(int i);
 
 
 	@Override
-	public abstract int getUpperBound(int i);
+	public int getUpperBound(int i);
 
 
-	/**
-	 * @return the number of integer sub ranges in this IntRangeSearcher
-	 */
+	@Override
 	public int size();
 
 }

@@ -4,21 +4,21 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-10-29
  */
-public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutable {
-	private primitiveCollections.IntArrayList rangePoints;
+public final class FloatRangeSearcherMutableImpl implements FloatRangeSearcherMutable {
+	private primitiveCollections.FloatArrayList rangePoints;
 	private final boolean locked;
 	private boolean throwIfRangeExists;
 	private boolean combineOverlap;
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1) {
+	public FloatRangeSearcherMutableImpl(float start1, float end1) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
 	}
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1, int start2, int end2) {
+	public FloatRangeSearcherMutableImpl(float start1, float end1, float start2, float end2) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
@@ -26,7 +26,7 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1, int start2, int end2, int start3, int end3) {
+	public FloatRangeSearcherMutableImpl(float start1, float end1, float start2, float end2, float start3, float end3) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
@@ -35,12 +35,12 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(primitiveCollections.IntList rangePoints) {
+	public FloatRangeSearcherMutableImpl(primitiveCollections.FloatList rangePoints) {
 		this(rangePoints, false, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(primitiveCollections.IntList rangePoints, boolean locked,
+	public FloatRangeSearcherMutableImpl(primitiveCollections.FloatList rangePoints, boolean locked,
 			boolean throwErrorIfEqualRangeExists, boolean combineOverlappingRanges) {
 		this(locked, throwErrorIfEqualRangeExists, combineOverlappingRanges);
 
@@ -50,18 +50,18 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(IntRangeSearcher src) {
+	public FloatRangeSearcherMutableImpl(FloatRangeSearcher src) {
 		this(src, false, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(IntRangeSearcher src, boolean locked,
+	public FloatRangeSearcherMutableImpl(FloatRangeSearcher src, boolean locked,
 			boolean throwErrorIfEqualRangeExists, boolean combineOverlappingRanges) {
 		this(locked, throwErrorIfEqualRangeExists, combineOverlappingRanges);
 
 		for(int i = 0, size = src.size(); i < size; i++) {
-			int start = src.getLowerBound(i);
-			int end = src.getUpperBound(i);
+			float start = src.getLowerBound(i);
+			float end = src.getUpperBound(i);
 			if(throwIfRangeExists) {
 				Ranges.throwIfRangeExists(rangePoints, start, end);
 			}
@@ -70,19 +70,19 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl() {
+	public FloatRangeSearcherMutableImpl() {
 		this(false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(boolean locked) {
+	public FloatRangeSearcherMutableImpl(boolean locked) {
 		this(locked, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(boolean locked, boolean throwErrorIfEqualRangeExists,
+	public FloatRangeSearcherMutableImpl(boolean locked, boolean throwErrorIfEqualRangeExists,
 			boolean combineOverlappingRanges) {
-		this.rangePoints = new primitiveCollections.IntArrayList();
+		this.rangePoints = new primitiveCollections.FloatArrayList();
 		this.locked = locked;
 		this.throwIfRangeExists = throwErrorIfEqualRangeExists;
 		this.combineOverlap = combineOverlappingRanges;
@@ -90,13 +90,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public boolean isMatch(int val) {
+	public boolean isMatch(float val) {
 		return indexOfMatch(val) > -1;
 	}
 
 
 	@Override
-	public int indexOfMatch(int val) {
+	public int indexOfMatch(float val) {
 		for(int index = 0, size = rangePoints.size(); index < size; index += 2) {
 			if(rangePoints.get(index) <= val && rangePoints.get(index + 1) >= val) {
 				return index;
@@ -107,13 +107,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public int getLowerBound(int i) {
+	public float getLowerBound(int i) {
 		return rangePoints.get(i << 1);
 	}
 
 
 	@Override
-	public int getUpperBound(int i) {
+	public float getUpperBound(int i) {
 		return rangePoints.get((i << 1) + 1);
 	}
 
@@ -126,13 +126,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 	private void checkLocked() {
 		if(locked) {
-			throw new IllegalStateException("cannot modify a locked IntRangeSearcherMutableImpl");
+			throw new IllegalStateException("cannot modify a locked FloatRangeSearcherMutableImpl");
 		}
 	}
 
 
 	@Override
-	public void addRange(int start, int end) {
+	public void addRange(float start, float end) {
 		checkLocked();
 		if(throwIfRangeExists) {
 			Ranges.throwIfRangeExists(rangePoints, start, end);
@@ -157,7 +157,7 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public boolean removeEqualRange(int start, int end) {
+	public boolean removeEqualRange(float start, float end) {
 		checkLocked();
 		int index = Ranges.indexOfRange(rangePoints, start, end);
 		if(index > -1) {
@@ -170,14 +170,14 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public void removeRange(int start, int end) {
+	public void removeRange(float start, float end) {
 		Ranges.removeMatchingRangeSections(rangePoints, start, end);
 	}
 
 
 	@Override
-	public IntRangeSearcher toImmutable() {
-		return new IntRangeSearcherMutableImpl(this, true, true, false);
+	public FloatRangeSearcher toImmutable() {
+		return new FloatRangeSearcherMutableImpl(this, true, true, false);
 	}
 
 }

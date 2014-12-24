@@ -1,4 +1,4 @@
-package dataUtility;
+package dataUtils;
 
 import java.util.List;
 import java.util.RandomAccess;

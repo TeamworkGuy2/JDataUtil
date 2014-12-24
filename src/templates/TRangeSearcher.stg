@@ -1,0 +1,32 @@
+TRangeSearcher(var) ::= <<
+package $var.packageName$;
+
+/**
+ * @author TeamworkGuy2
+ * @since 2014-12-13
+$var.implementClassNames:{x |  * @see $x$
+}$ */
+public interface $var.className$ extends $var.implementClassNames:{x | $x$}; separator=", "$ {
+
+	@Override
+	public boolean isMatch($var.type$ val);
+
+
+	@Override
+	public int indexOfMatch($var.type$ val);
+
+
+	@Override
+	public $var.type$ getLowerBound(int i);
+
+
+	@Override
+	public $var.type$ getUpperBound(int i);
+
+
+	@Override
+	public int size();
+
+}
+
+>>

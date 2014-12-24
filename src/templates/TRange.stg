@@ -1,0 +1,37 @@
+TRange(var) ::= <<
+package $var.packageName$;
+
+/** An $var.type$ range set represents multiple sets of contiguous $var.objectType$s.
+ * Each range is represented by an inclusive lower and inclusive upper bound.<br>
+ * For example a $var.className$ with {@code size()==1} that returns
+ * {@code getLowerBound(0)==20} and {@code getUpperBound(0)==150}
+ * matches all $var.objectType$s between {@code 20} and {@code 150} including {@code 20} and {@code 150}.<br>
+ * An $var.className$ may contain multiple $var.objectType$s ranges, for example, 0 through 10
+ * and 90 through 100.
+ * @author TeamworkGuy2
+ * @since 2014-12-13
+ */
+public interface $var.className$ {
+
+	/**
+	 * @param val the sub range index to retrieve the lower bound of
+	 * @return the least $var.objectType$, inclusive, of a specific sub range in this $var.className$
+	 */
+	public $var.type$ getLowerBound(int index);
+
+
+	/**
+	 * @param val the sub range index to retrieve the upper bound of
+	 * @return the greatest $var.objectType$, inclusive, of a specific sub range in this $var.className$
+	 */
+	public $var.type$ getUpperBound(int index);
+
+
+	/**
+	 * @return the number of $var.type$ sub ranges in this $var.className$
+	 */
+	public int size();
+
+}
+
+>>

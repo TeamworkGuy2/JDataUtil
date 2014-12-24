@@ -6,8 +6,8 @@ import java.util.HashSet;
 
 import checks.Check;
 import dataType.AddCondition;
-import dataUtility.ListAdd;
-import dataUtility.ListUtil;
+import dataUtils.ListAdd;
+import dataUtils.ListUtil;
 
 
 /**

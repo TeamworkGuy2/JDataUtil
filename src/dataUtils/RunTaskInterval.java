@@ -1,4 +1,4 @@
-package dataUtility;
+package dataUtils;
 
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;

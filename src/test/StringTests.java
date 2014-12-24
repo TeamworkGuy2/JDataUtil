@@ -14,7 +14,7 @@ import stringUtils.StringIndex;
 import stringUtils.StringModify;
 import stringUtils.StringReplace;
 import checks.Check;
-import dataUtility.ListUtil;
+import dataUtils.ListUtil;
 
 /**
  * @author TeamworkGuy2

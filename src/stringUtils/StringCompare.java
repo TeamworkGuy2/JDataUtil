@@ -3,7 +3,7 @@ package stringUtils;
 import java.util.List;
 import java.util.Map;
 
-import dataUtility.Entries;
+import dataUtils.Entries;
 
 /** Utility methods for comparing portions of strings.<br>
  * Includes {@link #startsWith(String, String...)} and {@link #endsWith(String, String...)}

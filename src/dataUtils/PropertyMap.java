@@ -1,4 +1,4 @@
-package dataUtility;
+package dataUtils;
 
 import java.awt.Color;
 import java.io.File;

@@ -44,13 +44,13 @@ public final class CharSearcherMutable implements CharSearcher {
 
 
 	@Override
-	public boolean isMatch(int ch) {
+	public boolean isMatch(char ch) {
 		return indexOfMatch(ch) > -1;
 	}
 
 
 	@Override
-	public int indexOfMatch(int ch) {
+	public int indexOfMatch(char ch) {
 		for(int i = 0, size = chars.size(); i < size; i++) {
 			if(chars.get(i) == ch) {
 				return i;

@@ -4,21 +4,21 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-10-29
  */
-public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutable {
-	private primitiveCollections.IntArrayList rangePoints;
+public final class CharRangeSearcherMutableImpl implements CharRangeSearcherMutable {
+	private primitiveCollections.CharArrayList rangePoints;
 	private final boolean locked;
 	private boolean throwIfRangeExists;
 	private boolean combineOverlap;
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1) {
+	public CharRangeSearcherMutableImpl(char start1, char end1) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
 	}
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1, int start2, int end2) {
+	public CharRangeSearcherMutableImpl(char start1, char end1, char start2, char end2) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
@@ -26,7 +26,7 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(int start1, int end1, int start2, int end2, int start3, int end3) {
+	public CharRangeSearcherMutableImpl(char start1, char end1, char start2, char end2, char start3, char end3) {
 		this(false);
 		rangePoints.add(start1);
 		rangePoints.add(end1);
@@ -35,12 +35,12 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(primitiveCollections.IntList rangePoints) {
+	public CharRangeSearcherMutableImpl(primitiveCollections.CharList rangePoints) {
 		this(rangePoints, false, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(primitiveCollections.IntList rangePoints, boolean locked,
+	public CharRangeSearcherMutableImpl(primitiveCollections.CharList rangePoints, boolean locked,
 			boolean throwErrorIfEqualRangeExists, boolean combineOverlappingRanges) {
 		this(locked, throwErrorIfEqualRangeExists, combineOverlappingRanges);
 
@@ -50,18 +50,18 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl(IntRangeSearcher src) {
+	public CharRangeSearcherMutableImpl(CharRangeSearcher src) {
 		this(src, false, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(IntRangeSearcher src, boolean locked,
+	public CharRangeSearcherMutableImpl(CharRangeSearcher src, boolean locked,
 			boolean throwErrorIfEqualRangeExists, boolean combineOverlappingRanges) {
 		this(locked, throwErrorIfEqualRangeExists, combineOverlappingRanges);
 
 		for(int i = 0, size = src.size(); i < size; i++) {
-			int start = src.getLowerBound(i);
-			int end = src.getUpperBound(i);
+			char start = src.getLowerBound(i);
+			char end = src.getUpperBound(i);
 			if(throwIfRangeExists) {
 				Ranges.throwIfRangeExists(rangePoints, start, end);
 			}
@@ -70,19 +70,19 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 	}
 
 
-	public IntRangeSearcherMutableImpl() {
+	public CharRangeSearcherMutableImpl() {
 		this(false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(boolean locked) {
+	public CharRangeSearcherMutableImpl(boolean locked) {
 		this(locked, true, false);
 	}
 
 
-	public IntRangeSearcherMutableImpl(boolean locked, boolean throwErrorIfEqualRangeExists,
+	public CharRangeSearcherMutableImpl(boolean locked, boolean throwErrorIfEqualRangeExists,
 			boolean combineOverlappingRanges) {
-		this.rangePoints = new primitiveCollections.IntArrayList();
+		this.rangePoints = new primitiveCollections.CharArrayList();
 		this.locked = locked;
 		this.throwIfRangeExists = throwErrorIfEqualRangeExists;
 		this.combineOverlap = combineOverlappingRanges;
@@ -90,13 +90,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public boolean isMatch(int val) {
+	public boolean isMatch(char val) {
 		return indexOfMatch(val) > -1;
 	}
 
 
 	@Override
-	public int indexOfMatch(int val) {
+	public int indexOfMatch(char val) {
 		for(int index = 0, size = rangePoints.size(); index < size; index += 2) {
 			if(rangePoints.get(index) <= val && rangePoints.get(index + 1) >= val) {
 				return index;
@@ -107,13 +107,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public int getLowerBound(int i) {
+	public char getLowerBound(int i) {
 		return rangePoints.get(i << 1);
 	}
 
 
 	@Override
-	public int getUpperBound(int i) {
+	public char getUpperBound(int i) {
 		return rangePoints.get((i << 1) + 1);
 	}
 
@@ -126,13 +126,13 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 	private void checkLocked() {
 		if(locked) {
-			throw new IllegalStateException("cannot modify a locked IntRangeSearcherMutableImpl");
+			throw new IllegalStateException("cannot modify a locked CharRangeSearcherMutableImpl");
 		}
 	}
 
 
 	@Override
-	public void addRange(int start, int end) {
+	public void addRange(char start, char end) {
 		checkLocked();
 		if(throwIfRangeExists) {
 			Ranges.throwIfRangeExists(rangePoints, start, end);
@@ -157,7 +157,7 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public boolean removeEqualRange(int start, int end) {
+	public boolean removeEqualRange(char start, char end) {
 		checkLocked();
 		int index = Ranges.indexOfRange(rangePoints, start, end);
 		if(index > -1) {
@@ -170,14 +170,14 @@ public final class IntRangeSearcherMutableImpl implements IntRangeSearcherMutabl
 
 
 	@Override
-	public void removeRange(int start, int end) {
+	public void removeRange(char start, char end) {
 		Ranges.removeMatchingRangeSections(rangePoints, start, end);
 	}
 
 
 	@Override
-	public IntRangeSearcher toImmutable() {
-		return new IntRangeSearcherMutableImpl(this, true, true, false);
+	public CharRangeSearcher toImmutable() {
+		return new CharRangeSearcherMutableImpl(this, true, true, false);
 	}
 
 }

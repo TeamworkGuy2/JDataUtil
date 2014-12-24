@@ -1,4 +1,4 @@
-package dataUtility;
+package dataUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;

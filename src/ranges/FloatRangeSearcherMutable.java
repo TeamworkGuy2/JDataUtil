@@ -1,18 +1,18 @@
 package ranges;
 
-/** A mutable {@link IntRangeSearcher} that allows for the addition and removal of ranges.<br>
+/** A mutable {@link FloatRangeSearcher} that allows for the addition and removal of ranges.<br>
  * 
  * @author TeamworkGuy2
  * @since 2014-12-13
  */
-public interface IntRangeSearcherMutable extends IntRangeSearcher {
+public interface FloatRangeSearcherMutable extends FloatRangeSearcher {
 
 
 	/** Add a range to this set of ranges
 	 * @param start the inclusive start of the range
 	 * @param end the inclusive end of the range
 	 */
-	public void addRange(int start, int end);
+	public void addRange(float start, float end);
 
 
 	/** Remove the specified range
@@ -27,19 +27,19 @@ public interface IntRangeSearcherMutable extends IntRangeSearcher {
 	 * @param end the inclusive end of the range
 	 * @return true if an equal range was found and successfully removed, false if not
 	 */
-	public boolean removeEqualRange(int start, int end);
+	public boolean removeEqualRange(float start, float end);
 
 
 	/** Remove any portions of existing ranges that include the specified range
 	 * @param start the inclusive start of the range
 	 * @param end the inclusive end of the range
 	 */
-	public void removeRange(int start, int end);
+	public void removeRange(float start, float end);
 
 
-	/** Create an immutable copy of this int range set
-	 * @return an immutable copy of this int range set
+	/** Create an immutable copy of this float range set
+	 * @return an immutable copy of this float range set
 	 */
-	public IntRangeSearcher toImmutable();
+	public FloatRangeSearcher toImmutable();
 
 }
