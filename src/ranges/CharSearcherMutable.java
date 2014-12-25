@@ -1,14 +1,13 @@
 package ranges;
 
-import primitiveCollections.IntArrayList;
+import primitiveCollections.CharListSorted;
 
-
-/** A {@link CharSearcher} that contains a set of chars to compare input characters to.
+/** A {@link CharSearcher} that contains a set of chars to compare input char to.
  * @author TeamworkGuy2
  * @since 2014-11-1
  */
 public final class CharSearcherMutable implements CharSearcher {
-	private IntArrayList chars;
+	private CharListSorted values;
 	private final boolean locked;
 
 
@@ -16,27 +15,27 @@ public final class CharSearcherMutable implements CharSearcher {
 	public CharSearcherMutable(char... cs) {
 		this.locked = false;
 		if(cs != null) {
-			this.chars = new IntArrayList(cs.length);
+			this.values = new CharListSorted(cs.length);
 			for(char c : cs) {
-				if(this.chars.contains(c)) {
+				if(this.values.contains(c)) {
 					throw new IllegalArgumentException("duplicate searcher char '" + c + "'");
 				}
-				this.chars.add(c);
+				this.values.add(c);
 			}
 		}
 		else {
-			this.chars = new IntArrayList();
+			this.values = new CharListSorted();
 		}
 	}
 
 
-	public CharSearcherMutable(CharSearcherMutable charSearcher, boolean locked) {
+	public CharSearcherMutable(CharSearcherMutable valueSearcher, boolean locked) {
 		this.locked = locked;
-		this.chars = charSearcher.chars.copy();
+		this.values = valueSearcher.values.copy();
 
-		for(int i = 0, size = this.chars.size(); i < size; i++) {
-			int c = this.chars.get(i);
-			if(this.chars.contains(c)) {
+		for(int i = 0, size = this.values.size(); i < size; i++) {
+			char c = this.values.get(i);
+			if(this.values.contains(c)) {
 				throw new IllegalArgumentException("duplicate searcher char '" + c + "'");
 			}
 		}
@@ -44,24 +43,19 @@ public final class CharSearcherMutable implements CharSearcher {
 
 
 	@Override
-	public boolean isMatch(char ch) {
-		return indexOfMatch(ch) > -1;
+	public boolean isMatch(char value) {
+		return indexOfMatch(value) > -1;
 	}
 
 
 	@Override
-	public int indexOfMatch(char ch) {
-		for(int i = 0, size = chars.size(); i < size; i++) {
-			if(chars.get(i) == ch) {
-				return i;
-			}
-		}
-		return -1;
+	public int indexOfMatch(char value) {
+		return values.indexOf(value);
 	}
 
 
 	public int size() {
-		return chars.size();
+		return values.size();
 	}
 
 
@@ -77,29 +71,29 @@ public final class CharSearcherMutable implements CharSearcher {
 	}
 
 
-	public void addChar(int ch) {
+	public void addChar(char value) {
 		checkLocked();
-		if(chars.indexOf(ch) > -1) {
-			throw new IllegalArgumentException("duplicate searcher char '" + ch + "'");
+		if(values.indexOf(value) > -1) {
+			throw new IllegalArgumentException("duplicate searcher char '" + value + "'");
 		}
-		chars.add(ch);
+		values.add(value);
 	}
 
 
 	public boolean removeCharAt(int index) {
 		checkLocked();
-		chars.remove(index);
+		values.remove(index);
 		return true;
 	}
 
 
-	public boolean removeChar(char ch) {
+	public boolean removeChar(char value) {
 		checkLocked();
-		int index = chars.indexOf(ch, 0);
+		int index = values.indexOf(value);
 		if (index == -1) {
 			return false;
 		}
-		chars.remove(index);
+		values.remove(index);
 		return true;
 	}
 

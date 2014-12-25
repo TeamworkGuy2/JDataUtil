@@ -1,32 +1,33 @@
-package ranges;
+TSearchSet(var) ::= <<
+package $var.packageName$;
 
-import primitiveCollections.CharListSorted;
-
-/** A {@link CharSearcher} that contains a {@link CharRange}
+$var.importStatements:{x | $x$
+}$
+/** A {@link $var.implementClassNames$} that contains a {@link $var.typeUpperCase$Range}
  * and a {@link CharSearcherMutable}
  * @author TeamworkGuy2
  * @since 2014-11-2
  */
-public final class CharSearchSet implements CharSearcher {
-	private CharListSorted values;
-	private CharRangeSearcherMutableImpl ranges;
+public final class $var.className$ implements $var.implementClassNames:{x | $x$}; separator=", "$ {
+	private $var.valuesCollectionClassName$ values;
+	private $var.rangesCollectionClassName$ ranges;
 	private boolean locked;
 
 
-	public CharSearchSet() {
-		this.values = new CharListSorted();
-		this.ranges = new CharRangeSearcherMutableImpl();
+	public $var.className$() {
+		this.values = new $var.valuesCollectionClassName$();
+		this.ranges = new $var.rangesCollectionClassName$();
 	}
 
 
 	@Override
-	public boolean isMatch(char ch) {
+	public boolean isMatch($var.type$ ch) {
 		return values.indexOf(ch) > -1 || ranges.isMatch(ch);
 	}
 
 
 	@Override
-	public int indexOfMatch(char ch) {
+	public int indexOfMatch($var.type$ ch) {
 		int index = values.indexOf(ch);
 		if(index > -1) {
 			return index;
@@ -48,29 +49,29 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public void addChar(char ch) {
+	public void add$var.typeUpperCase$($var.type$ ch) {
 		checkLocked();
 		if(values.contains(ch)) {
-			throw new IllegalArgumentException("duplicate searcher char '" + ch + "'");
+			throw new IllegalArgumentException("duplicate searcher $var.type$ '" + ch + "'");
 		}
 		values.add(ch);
 	}
 
 
-	public boolean removeCharAt(int index) {
+	public boolean remove$var.typeUpperCase$At(int index) {
 		checkLocked();
 		values.remove(index);
 		return false;
 	}
 
 
-	public boolean removeChar(char ch) {
+	public boolean remove$var.typeUpperCase$($var.type$ ch) {
 		checkLocked();
 		return values.removeValue(ch);
 	}
 
 
-	public void addRange(char start, char end) {
+	public void addRange($var.type$ start, $var.type$ end) {
 		checkLocked();
 		ranges.addRange(start, end);
 	}
@@ -83,7 +84,7 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public boolean removeRange(char start, char end) {
+	public boolean removeRange($var.type$ start, $var.type$ end) {
 		checkLocked();
 		return ranges.removeEqualRange(start, end);
 	}
@@ -101,14 +102,16 @@ public final class CharSearchSet implements CharSearcher {
 
 	private void checkLocked() {
 		if(locked) {
-			throw new IllegalStateException("cannot modify a locked ");
+			throw new IllegalStateException("cannot modify a locked $var.implementsClassNames$");
 		}
 	}
 
 
-	public CharSearcher toImmutable() {
+	public $var.implementClassNames$ toImmutable() {
 		this.setLocked(true);
 		return this;
 	}
 
 }
+
+>>

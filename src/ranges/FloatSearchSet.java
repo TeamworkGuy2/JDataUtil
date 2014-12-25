@@ -1,32 +1,32 @@
 package ranges;
 
-import primitiveCollections.CharListSorted;
+import primitiveCollections.FloatListSorted;
 
-/** A {@link CharSearcher} that contains a {@link CharRange}
+/** A {@link FloatSearcher} that contains a {@link FloatRange}
  * and a {@link CharSearcherMutable}
  * @author TeamworkGuy2
  * @since 2014-11-2
  */
-public final class CharSearchSet implements CharSearcher {
-	private CharListSorted values;
-	private CharRangeSearcherMutableImpl ranges;
+public final class FloatSearchSet implements FloatSearcher {
+	private FloatListSorted values;
+	private FloatRangeSearcherMutableImpl ranges;
 	private boolean locked;
 
 
-	public CharSearchSet() {
-		this.values = new CharListSorted();
-		this.ranges = new CharRangeSearcherMutableImpl();
+	public FloatSearchSet() {
+		this.values = new FloatListSorted();
+		this.ranges = new FloatRangeSearcherMutableImpl();
 	}
 
 
 	@Override
-	public boolean isMatch(char ch) {
+	public boolean isMatch(float ch) {
 		return values.indexOf(ch) > -1 || ranges.isMatch(ch);
 	}
 
 
 	@Override
-	public int indexOfMatch(char ch) {
+	public int indexOfMatch(float ch) {
 		int index = values.indexOf(ch);
 		if(index > -1) {
 			return index;
@@ -48,29 +48,29 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public void addChar(char ch) {
+	public void addFloat(float ch) {
 		checkLocked();
 		if(values.contains(ch)) {
-			throw new IllegalArgumentException("duplicate searcher char '" + ch + "'");
+			throw new IllegalArgumentException("duplicate searcher float '" + ch + "'");
 		}
 		values.add(ch);
 	}
 
 
-	public boolean removeCharAt(int index) {
+	public boolean removeFloatAt(int index) {
 		checkLocked();
 		values.remove(index);
 		return false;
 	}
 
 
-	public boolean removeChar(char ch) {
+	public boolean removeFloat(float ch) {
 		checkLocked();
 		return values.removeValue(ch);
 	}
 
 
-	public void addRange(char start, char end) {
+	public void addRange(float start, float end) {
 		checkLocked();
 		ranges.addRange(start, end);
 	}
@@ -83,7 +83,7 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public boolean removeRange(char start, char end) {
+	public boolean removeRange(float start, float end) {
 		checkLocked();
 		return ranges.removeEqualRange(start, end);
 	}
@@ -106,7 +106,7 @@ public final class CharSearchSet implements CharSearcher {
 	}
 
 
-	public CharSearcher toImmutable() {
+	public FloatSearcher toImmutable() {
 		this.setLocked(true);
 		return this;
 	}
