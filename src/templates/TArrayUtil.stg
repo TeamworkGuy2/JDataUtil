@@ -1,0 +1,322 @@
+TArrayUtil(var) ::= <<
+package $var.packageName$;
+
+$var.importStatements:{x | import $x$;
+}$
+/** Methods for finding the index of a value in an array of values, concat arrays
+ * together, reverse an array of values, and calculate the sum, average,
+ * minimum, or maximum of a numeric array.
+ * @author TeamworkGuy2
+ * @since 2014-6-2
+ */
+public final class $var.className$ {
+	public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+	public static final short[] EMPTY_SHORT_ARRAY = new short[0];
+	public static final char[] EMPTY_CHAR_ARRAY = new char[0];
+	public static final int[] EMPTY_INT_ARRAY = new int[0];
+	public static final long[] EMPTY_LONG_ARRAY = new long[0];
+	public static final float[] EMPTY_FLOAT_ARRAY = new float[0];
+	public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
+	public static final String[] EMPTY_STRING_ARRAY = new String[0];
+	public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+
+$var.types:{ary | 	// start $ary.type$ array methods
+	/** Convert a set of $ary.type$ values to an array
+	 * @param values the set of values
+	 * @return the array of values
+	 */
+$if(ary.isGeneric)$	@SafeVarargs
+$endif$	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$[] asArray($ary.type$... values) {
+		return values;
+	\}
+
+
+	/** Search for a matching $ary.type$ in an array of $ary.type$s
+	 * @param ary the array of values to search
+	 * @param value the value to search for
+	 * @return the index of the matching value, or -1 if the {@code value\} could not be found
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$int indexOf($ary.type$[] ary, $ary.type$ value) {
+		return indexOf(ary, 0, ary.length, value);
+	\}
+
+
+	/** Search for a matching $ary.type$ in an array of $ary.type$s
+	 * @param ary the array of values to search
+	 * @param off the offset into {@code ary\} at which to start searching for values
+	 * @param len the number of values to search for starting at {@code off\} in {@code ary\}
+	 * @param value the value to search for
+	 * @return the index of the matching value, or -1 if the {@code value\} could not be found
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$int indexOf($ary.type$[] ary, int off, int len, $ary.type$ value) {
+		for(int i = off, size = off + len; i < size; i++) {
+			if(ary[i]$ary.checkEquality$(value)) { return i; \}
+		\}
+		return -1;
+	\}
+
+
+	/** Return an array containing a copy of array {@code a\} and {@code b\}
+	 * @param a the first array
+	 * @param b the second array
+	 * @return a new array containing a shallow copy of both arrays
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$[] concat($ary.type$[] a, $ary.type$[] b) {
+		$ary.type$[] r = Arrays.copyOf(a, a.length + b.length);
+		System.arraycopy(b, 0, r, a.length, b.length);
+		return r;
+	\}
+
+
+	/** Reverse an $ary.type$ array.<br>
+	 * For example {@code ary=[0, 1, 2, 3]\}, the result would be {@code ary=[3, 2, 1, 0]\}.
+	 * @param ary the array to reverse a portion of
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$void reverse($ary.type$[] ary) {
+		reverse(ary, 0, ary.length);
+	\}
+
+
+	/** Reverse a subset of an $ary.type$ array.<br>
+	 * For example {@code ary=[0, 1, 2, 3, 4, 5]\} and {@code offset=2\} and {@code length=3\},
+	 * the result would be {@code ary=[0, 1, 4, 3, 2, 5]\}.
+	 * @param ary the array to reverse a portion of
+	 * @param offset the offset into the array at which to begin reversing the order of elements
+	 * @param length the number of elements to reverse
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$void reverse($ary.type$[] ary, int offset, int length) {
+		final int len = length/2;
+		for(int i = 0; i < len; i++) {
+			$ary.type$ temp = ary[i];
+			int index = length - i - 1;
+			ary[i] = ary[index];
+			ary[index] = temp;
+		\}
+	\}
+$if(ary.isAggregatable)$
+
+
+	/** Sum of an array
+	 * @param ary the array of integers to sum
+	 * @return the sum of all of the elements in the specified array
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.sumType$ sum($ary.type$[] ary) {
+		return sum(ary, 0, ary.length);
+	\}
+
+
+	/** Sum of the subset of an array
+	 * @param ary the array of $ary.type$s to sum
+	 * @param offset the offset into the array at which to start summing values
+	 * @param length the number of elements to sum from the array starting
+	 * at {@code offset\}
+	 * @return the sum of the specified array subset
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.sumType$ sum($ary.type$[] ary, int offset, int length) {
+		int offLen = offset + length;
+		$ary.sumType$ sum = $ary.defaultValue$;
+		for(int i = offset; i < offLen; i++) {
+			sum += ary[i];
+		\}
+		return sum;
+	\}
+
+
+	/** The average of an array
+	 * @param values the array of values to average
+	 * @return the average of the array
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.averageType$ avg($ary.type$[] values) {
+		return avg(values, 0, values.length);
+	\}
+
+
+	/** The average of a subset of an array
+	 * @param values the array of values to average
+	 * @param offset the offset into the array at which to start averaging values
+	 * @param length the number of values to average from the array
+	 * @return the average of the array subset specified
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.averageType$ avg($ary.type$[] values, int offset, int length) {
+		$ary.sumType$ total = 0;
+		int offLen = offset + length;
+		for(int i = offset; i < offLen; i++) {
+			total += values[i];
+		\}
+		return total/($ary.averageType$)length;
+	\}
+
+
+	/** Get the minimum value in an array subset
+	 * @param values the array to search
+	 * @return the minimum value found in the array subset specified
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$ min($ary.type$[] values) {
+		return min(values, 0, values.length);
+	\}
+
+
+	/** Get the minimum value in an array subset
+	 * @param values the array to search
+	 * @param offset the offset into the array at which to start searching
+	 * @param length the number of values to search
+	 * @return the minimum value found in the array subset specified
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$ min($ary.type$[] values, int offset, int length) {
+		$ary.type$ min = $ary.maxValue$;
+		int offLen = offset + length;
+		for(int i = offset; i < offLen; i++) {
+			if(min > values[i]) { min = values[i]; \}
+		\}
+		return min;
+	\}
+
+
+	/** Get the maximum value in an array subset
+	 * @param values the array to search
+	 * @return the minimum value found in the array subset specified
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$ max($ary.type$[] values) {
+		return max(values, 0, values.length);
+	\}
+
+
+	/** Get the maximum value in an array subset
+	 * @param values the array to search
+	 * @param offset the offset into the array at which to start searching
+	 * @param length the number of values to search
+	 * @return the minimum value found in the array subset specified
+	 */
+	public static final $if(ary.isGeneric)$$ary.genericSignature$ $endif$$ary.type$ max($ary.type$[] values, int offset, int length) {
+		$ary.type$ max = $ary.minValue$;
+		int offLen = offset + length;
+		for(int i = offset; i < offLen; i++) {
+			if(max < values[i]) { max = values[i]; \}
+		\}
+		return max;
+	\}
+	// end $ary.type$ array methods
+
+$else$
+	// end $ary.type$ array methods
+$endif$
+
+
+}$
+	// AND operations on primitive arrays
+	/**
+	 * @return a newly created array containing the ANDed results of {@code a} and {@code b}
+	 * @see ArrayUtil#and(byte[], int, byte[], int, byte[], int, int) and()
+	 */
+	public static final byte[] and(byte[] a, byte[] b) {
+		byte[] dst = new byte[a.length];
+		and(a, 0, b, 0, dst, 0, dst.length);
+		return dst;
+	}
+
+
+	/**
+	 * @see ArrayUtil#and(byte[], int, byte[], int, byte[], int, int) and()
+	 */
+	public static final void and(byte[] a, byte[] b, byte[] dst, int length) {
+		and(a, 0, b, 0, dst, 0, length);
+	}
+
+
+	/** AND {@code length} number of bytes from {@code a} with {@code b} using the syntax ({@code a[i] & b[i]})
+	 * and store the result in {@code dst}
+	 * @param a the first array
+	 * @param offsetA the offset into the {@code a} array at which to start ANDing values
+	 * @param b the second array
+	 * @param offsetB the offset into the {@code b} array at which to start ANDing values
+	 * @param dst the destination array to store the ANDed results in
+	 * @param dstOffset the offset into the {@code dst} array at which to start storing the ANDed values
+	 * @param length the number of values to read from {@code a} and {@code b} and store in {@code dst}
+	 */
+	public static final void and(byte[] a, int offsetA, byte[] b, int offsetB, byte[] dst, int dstOffset, int length) {
+		for(int i = 0, aI = offsetA, bI = offsetB, dstI = dstOffset; i < length; i++, aI++, bI++, dstI++) {
+			dst[dstI] = (byte)(a[aI] & b[bI]);
+		}
+	}
+	// end AND
+
+
+	// OR operations on primitive arrays
+	/**
+	 * @return a newly created array containing the ORed results of {@code a} and {@code b}
+	 * @see ArrayUtil#or(byte[], int, byte[], int, byte[], int, int) or()
+	 */
+	public static final byte[] or(byte[] a, byte[] b) {
+		byte[] dst = new byte[a.length];
+		or(a, 0, b, 0, dst, 0, dst.length);
+		return dst;
+	}
+
+
+	/**
+	 * @see ArrayUtil#or(byte[], int, byte[], int, byte[], int, int) or()
+	 */
+	public static final void or(byte[] a, byte[] b, byte[] dst, int length) {
+		or(a, 0, b, 0, dst, 0, length);
+	}
+
+
+	/** OR {@code length} number of bytes from {@code a} with {@code b} using the syntax ({@code a[i] | b[i]})
+	 * and store the result in {@code dst}
+	 * @param a the first array
+	 * @param offsetA the offset into the {@code a} array at which to start ORing values
+	 * @param b the second array
+	 * @param offsetB the offset into the {@code b} array at which to start ORing values
+	 * @param dst the destination array to store the ORed results in
+	 * @param dstOffset the offset into the {@code dst} array at which to start storing the ORed values
+	 * @param length the number of values to read from {@code a} and {@code b} and store in {@code dst}
+	 */
+	public static final void or(byte[] a, int offsetA, byte[] b, int offsetB, byte[] dst, int dstOffset, int length) {
+		for(int i = 0, aI = offsetA, bI = offsetB, dstI = dstOffset; i < length; i++, aI++, bI++, dstI++) {
+			dst[dstI] = (byte)(a[aI] | b[bI]);
+		}
+	}
+	// end OR
+
+
+	// XOR operations on primitive arrays
+	/**
+	 * @return a newly created array containing the XORed results of {@code a} and {@code b}
+	 * @see ArrayUtil#xor(byte[], int, byte[], int, byte[], int, int) xor()
+	 */
+	public static final byte[] xor(byte[] a, byte[] b) {
+		byte[] dst = new byte[a.length];
+		xor(a, 0, b, 0, dst, 0, dst.length);
+		return dst;
+	}
+
+
+	/**
+	 * @see ArrayUtil#xor(byte[], int, byte[], int, byte[], int, int) xor()
+	 */
+	public static final void xor(byte[] a, byte[] b, byte[] dst, int length) {
+		xor(a, 0, b, 0, dst, 0, length);
+	}
+
+
+	/** XOR {@code length} number of bytes from {@code a} with {@code b} using the syntax ({@code a[i] ^ b[i]})
+	 * and store the result in {@code dst}
+	 * @param a the first array
+	 * @param offsetA the offset into the {@code a} array at which to start XORing values
+	 * @param b the second array
+	 * @param offsetB the offset into the {@code b} array at which to start XORing values
+	 * @param dst the destination array to store the XORed results in
+	 * @param dstOffset the offset into the {@code dst} array at which to start storing the XORed values
+	 * @param length the number of values to read from {@code a} and {@code b} and store in {@code dst}
+	 */
+	public static final void xor(byte[] a, int offsetA, byte[] b, int offsetB, byte[] dst, int dstOffset, int length) {
+		for(int i = 0, aI = offsetA, bI = offsetB, dstI = dstOffset; i < length; i++, aI++, bI++, dstI++) {
+			dst[dstI] = (byte)(a[aI] ^ b[bI]);
+		}
+	}
+	// end XOR
+
+}
+
+>>
