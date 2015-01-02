@@ -257,6 +257,47 @@ public final class StringModify {
 	}
 
 
+
+	/** Trim quotes from the start and end of a list of strings if there
+	 * are quotes {@code "} at both the beginning and end of the string.
+	 * @param strs the list of strings to trim quotes from, the
+	 * modified strings are replaced in the list by their trimmed versions.
+	 * This list must be modifiable, its size will not be changed.
+	 */
+	public static final void trimQuotes(List<String> strs) {
+		trimSurrounding(strs, '"');
+	}
+
+
+	public static final void trimSurrounding(List<String> strs, char ch) {
+		for(int i = 0, size = strs.size(); i < size; i++) {
+			String str = strs.get(i);
+			if(str.length() > 1 && str.charAt(0) == ch && str.charAt(str.length() - 1) == ch) {
+				strs.set(i, str.substring(1, str.length() - 1));
+			}
+		}
+	}
+
+
+	/** Trim quotes from the start and end of a string if there
+	 * are quotes {@code "} at both the beginning and end of the string.
+	 * @param str the string to trim quotes from, the modified strings are
+	 * replaced in the list by their trimmed versions.  This list must be
+	 * modifiable, its size will not be changed.
+	 */
+	public static final String trimQuotes(String str) {
+		return trimSurrounding(str, '"');
+	}
+
+
+	public static final String trimSurrounding(String str, char ch) {
+		if(str.length() > 1 && str.charAt(0) == ch && str.charAt(str.length() - 1) == ch) {
+			return str.substring(1, str.length() - 1);
+		}
+		return str;
+	}
+
+
 	/** Write the hexadecimal value of the specified byte array to the specified
 	 * appendable output.
 	 * @param hexBytes the array of bytes to read values from
