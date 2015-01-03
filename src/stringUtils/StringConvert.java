@@ -18,40 +18,60 @@ public final class StringConvert {
 	 * invalid characters with their corresponding character codes
 	 * @param content the String to convert non-XML character to XML characters
 	 * @return String with invalid XML characters replaced with XML character codes
+	 * @see #escapeXml(String, StringBuilder)
 	 */
 	public static String escapeXml(String content) {
 		if(content.indexOf("&") == -1 && content.indexOf("'") == -1 && content.indexOf("\"") == -1 &&
 				content.indexOf("<") == -1 && content.indexOf(">") == -1) {
 			return content;
 		}
-		StringBuilder validated = new StringBuilder(content);
+		return escapeXml(content, null).toString();
+	}
+
+
+	/** Convert an XML string containing invalid XML characters into XML values (&amp; &apos; etc.) by replacing
+	 * invalid characters with their corresponding character codes
+	 * @param content the String to convert non-XML character to XML characters
+	 * @param dst the destination string builder to store the escaped string in
+	 * @return the {@code dst} string builder with {@code content} appended with
+	 * invalid XML characters replaced with XML character codes
+	 */
+	public static StringBuilder escapeXml(String content, StringBuilder dst) {
+		int offset = 0;
+		if(dst == null) {
+			dst = new StringBuilder(content);
+		}
+		else {
+			offset = dst.length();
+			dst.append(content);
+		}
 		int index = 0;
-		index = validated.indexOf("&", 0);
+		index = dst.indexOf("&", offset);
 		while(index > -1) {
-			validated.replace(index, index+1, "&amp;");
-			index = validated.indexOf("&", index+1);
+			dst.replace(index, index+1, "&amp;");
+			index = dst.indexOf("&", index+1);
 		}
-		index = validated.indexOf("'", 0);
+		index = dst.indexOf("'", offset);
 		while(index > -1) {
-			validated.replace(index, index+1, "&apos;");
-			index = validated.indexOf("'", index+1);
+			dst.replace(index, index+1, "&apos;");
+			index = dst.indexOf("'", index+1);
 		}
-		index = validated.indexOf("\"", 0);
+		index = dst.indexOf("\"", offset);
 		while(index > -1) {
-			validated.replace(index, index+1, "&quot;");
-			index = validated.indexOf("\"", index+1);
+			dst.replace(index, index+1, "&quot;");
+			index = dst.indexOf("\"", index+1);
 		}
-		index = validated.indexOf("<", 0);
+		index = dst.indexOf("<", offset);
 		while(index > -1) {
-			validated.replace(index, index+1, "&lt;");
-			index = validated.indexOf("<", index+1);
+			dst.replace(index, index+1, "&lt;");
+			index = dst.indexOf("<", index+1);
 		}
-		index = validated.indexOf(">", 0);
+		index = dst.indexOf(">", offset);
 		while(index > -1) {
-			validated.replace(index, index+1, "&gt;");
-			index = validated.indexOf(">", index+1);
+			dst.replace(index, index+1, "&gt;");
+			index = dst.indexOf(">", index+1);
 		}
-		return validated.toString();
+		return dst;
 	}
 
 
@@ -59,41 +79,63 @@ public final class StringConvert {
 	 * them with the corresponding character
 	 * @param content the String to convert XML to non-XML characters (&amp; &quot; etc.)
 	 * @return String with XML characters replaced with normal characters
+	 * @return a string containing {@code content} with XML characters replaced
+	 * with normal characters
+	 * @see #unescapeXml(String, StringBuilder)
 	 */
-	public static String unescapeXml(String content) {
+	public static final String unescapeXml(String content) {
 		if(content.indexOf("&") == -1) {
 			return content;
 		}
-		StringBuilder converted = new StringBuilder(content);
-		int index = 0;
-		index = converted.indexOf("&amp;", 0);
-		while(index > -1) {
-			converted.replace(index, index+5, "&");
-			index = converted.indexOf("&amp;", index+1);
-		}
-		index = converted.indexOf("&apos;", 0);
-		while(index > -1) {
-			converted.replace(index, index+6, "'");
-			index = converted.indexOf("&apos;", index+1);
-		}
-		index = converted.indexOf("&quot;", 0);
-		while(index > -1) {
-			converted.replace(index, index+6, "\"");
-			index = converted.indexOf("&quot;", index+1);
-		}
-		index = converted.indexOf("&lt;", 0);
-		while(index > -1) {
-			converted.replace(index, index+4, "<");
-			index = converted.indexOf("&lt;", index+1);
-		}
-		index = converted.indexOf("&gt;", 0);
-		while(index > -1) {
-			converted.replace(index, index+4, ">");
-			index = converted.indexOf("&gt;", index+1);
-		}
-		return converted.toString();
+		return unescapeXml(content, null).toString();
 	}
 
+
+	/** Convert an XML string containing XML character codes (&amp; &apos; etc.) by replacing
+	 * them with the corresponding character
+	 * @param content the String to convert XML to non-XML characters (&amp; &quot; etc.)
+	 * @param dst the destination string builder to store the replaced characters in
+	 * @return String with XML characters replaced with normal characters
+	 * @return the {@code dst} string builder with {@code content} appended with
+	 * XML characters replaced with normal characters
+	 */
+	public static StringBuilder unescapeXml(String content, StringBuilder dst) {
+		int offset = 0;
+		if(dst == null) {
+			dst = new StringBuilder(content);
+		}
+		else {
+			offset = dst.length();
+			dst.append(content);
+		}
+		int index = 0;
+		index = dst.indexOf("&amp;", offset);
+		while(index > -1) {
+			dst.replace(index, index+5, "&");
+			index = dst.indexOf("&amp;", index+1);
+		}
+		index = dst.indexOf("&apos;", offset);
+		while(index > -1) {
+			dst.replace(index, index+6, "'");
+			index = dst.indexOf("&apos;", index+1);
+		}
+		index = dst.indexOf("&quot;", offset);
+		while(index > -1) {
+			dst.replace(index, index+6, "\"");
+			index = dst.indexOf("&quot;", index+1);
+		}
+		index = dst.indexOf("&lt;", offset);
+		while(index > -1) {
+			dst.replace(index, index+4, "<");
+			index = dst.indexOf("&lt;", index+1);
+		}
+		index = dst.indexOf("&gt;", offset);
+		while(index > -1) {
+			dst.replace(index, index+4, ">");
+			index = dst.indexOf("&gt;", index+1);
+		}
+		return dst;
+	}
 
 
 	/** Add escapes to special characters in a sequence of characters<br>
@@ -133,10 +175,8 @@ public final class StringConvert {
 
 
 	/** Unwrap a sequence of escaped characters.<br>
-	 * For example, given:<br>
-	 * {@code src = "a \\\"block\\\" char '\\\"'"}<br>
-	 * a call to:<br>
-	 * {@code unescape(src, 0, '\\', '"', new StringBuilder())}<br>
+	 * For example, a call:<br>
+	 * {@code unescape("a \\\"block\\\" char '\\\"'", 0, '\\', '"', new StringBuilder())}<br>
 	 * would return {@code 21} (the index of the end character or end of the string)<br>
 	 * and the last, appendable, parameter would contain:<br>
 	 * {@code a "block" char '"'}
@@ -170,6 +210,83 @@ public final class StringConvert {
 			throw new RuntimeException(ioe);
 		}
 		return i;
+	}
+
+
+	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, Appendable dst) {
+		return unescapePartialQuoted(src, offset, escapeChar, quote, endCh1, endCh1, false, dst);
+	}
+
+
+	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, char endCh2, Appendable dst) {
+		return unescapePartialQuoted(src, offset, escapeChar, quote, endCh1, endCh2, false, dst);
+	}
+
+
+	/** Parse a sub-string until an ending character is reached, unless the ending character appears in a quoted section.
+	 * For example, if the ending characters are {@code ','} and {@code ']'}, and the {@code str} is:<br>
+	 * {@code "a string containing "quotes, [], and commas", further string"}<br>
+	 * the result is:<br>
+	 * {@code "a string containing "quotes, [], and commas"}
+	 * 
+	 * @param src
+	 * @param offset
+	 * @param escapeChar
+	 * @param quote
+	 * @param endCh1
+	 * @param endCh2
+	 * @param throwIfNoEndChar true to throw an error if the string ends without an end char, false read until the end of the string
+	 * @param dst
+	 * @return the index of the {@code endCh#} that parsing stopped at, or the length
+	 * of the {@code src} string if no {@code endCh#} character was encountered 
+	 */
+	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, char endCh2, boolean throwIfNoEndChar, Appendable dst) {
+		boolean added = false;
+		int endIndex = src.indexOf(endCh1, offset);
+		if(endIndex == -1) {
+			endIndex = src.indexOf(endCh2, offset);
+		}
+		if(!throwIfNoEndChar && endIndex == -1) {
+			endIndex = src.length();
+		}
+		int quoteIndex = StringIndex.indexOf(src, offset, endIndex - offset, quote);
+		if(quoteIndex > -1 && quoteIndex < endIndex) {
+			// append the portion of the string up to the quote
+			if(offset < quoteIndex) {
+				try {
+					dst.append(src, offset, quoteIndex + 1);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+			endIndex = StringConvert.unescape(src, quoteIndex + 1, escapeChar, quote, dst);
+			if(offset < quoteIndex) {
+				try {
+					dst.append('"');
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+			added = true;
+		}
+
+		if(endIndex == -1) {
+			if(throwIfNoEndChar) {
+				throw new IllegalArgumentException("string does not end properly, unquoted value did not end with '" + endCh1 + "' or '" + endCh2 + "'");
+			}
+			else {
+				endIndex = src.length();
+			}
+		}
+		else if(!added) {
+			try {
+				dst.append(src, offset, endIndex);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		return endIndex;
 	}
 
 

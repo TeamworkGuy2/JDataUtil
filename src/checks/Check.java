@@ -3,6 +3,8 @@ package checks;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.junit.Assert;
+
 /** Static methods for checking type, bounds, and other requirements
  * @author TeamworkGuy2
  * @since 2014-6-3
@@ -233,6 +235,87 @@ public final class Check {
 			throw new IllegalArgumentException("inputs (length: " + len1 + ") should be equal in length to (length: " + len2 + ")");
 		}
 
+	}
+
+
+	/**
+	 * @param task the action to perform
+	 * @param throwIfNoError true to throw an error if {@code task} does not
+	 * throw an {@code Exception}
+	 * @return true if the task did not throw an error, false if it did not throw an error
+	 */
+	public static final boolean assertException(boolean throwIfNoError, Runnable task) {
+		Throwable error = null;
+		try {
+			task.run();
+		} catch(Exception e) {
+			error = e;
+		} finally {
+			if(throwIfNoError) {
+				Assert.assertTrue("task was expected to throw error but did not", error == null);
+			}
+		}
+		return error == null;
+	}
+
+
+	/**
+	 * @param task the action to perform
+	 * @param throwIfNoError true to throw an error if {@code task} does not
+	 * throw a {@code Throwable}
+	 * @return true if the task did not throw an error, false if it did not throw an error
+	 */
+	public static final void assertThrowable(boolean throwIfNoError, Runnable task) {
+		Throwable error = null;
+		try {
+			task.run();
+		} catch(Throwable e) {
+			error = e;
+		} finally {
+			if(throwIfNoError) {
+				Assert.assertTrue("task was expected to throw error but did not", error == null);
+			}
+		}
+	}
+
+
+	/** Run a series of test against a set of inputs and expected results.
+	 * Each input is converted to a result via a function and the result is compared
+	 * to the expected result using {@link #equals(Object)}
+	 * @param inputs the array of inputs to process
+	 * @param expected the expected results of processing each input
+	 * @param perCheckMessage the message to print with each successfully result
+	 * @param errorMessage the message to include in the error message if the result
+	 * does not match the expected result 
+	 * @param action the action that takes an input from {@code inputs} and converts
+	 * it to a result value to compare to {@code expected}
+	 */
+	public static final <T, R> void assertTests(T[] inputs, R[] expected, String perCheckMessage, String errorMessage,
+			Function<T, R> action) {
+		assertLengthEqual(inputs.length, expected.length);
+
+		for(int i = 0, size = inputs.length; i < size; i++) {
+			R res = action.apply(inputs[i]);
+			Assert.assertEquals(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
+						expected[i] + "'", expected[i], res);
+		}
+	}
+
+
+	public static final <T, R> void assertTests(T[] inputs, R[] expected, String perCheckMessage, String errorMessage,
+			BiFunction<T, Integer, R> action) {
+		assertLengthEqual(inputs.length, expected.length);
+
+		for(int i = 0, size = inputs.length; i < size; i++) {
+			R res = action.apply(inputs[i], i);
+			Assert.assertEquals(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
+					expected[i] + "'", expected[i], res);
+		}
+	}
+
+
+	private static final void assertLengthEqual(int len1, int len2) {
+		Assert.assertEquals("inputs (length: " + len1 + ") should be equal in length to (length: " + len2 + ")", len1, len2);
 	}
 
 }
