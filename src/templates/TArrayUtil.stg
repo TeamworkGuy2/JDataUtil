@@ -9,6 +9,7 @@ $var.importStatements:{x | import $x$;
  * @author TeamworkGuy2
  * @since 2014-6-2
  */
+@javax.annotation.Generated("StringTemplate")
 public final class $var.className$ {
 	public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 	public static final short[] EMPTY_SHORT_ARRAY = new short[0];
@@ -19,6 +20,9 @@ public final class $var.className$ {
 	public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
 	public static final String[] EMPTY_STRING_ARRAY = new String[0];
 	public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+
+	private $var.className$() { throw new AssertionError("cannot instantiate static class $var.className$"); }
 
 
 $var.types:{ary | 	// start $ary.type$ array methods

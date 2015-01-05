@@ -6,6 +6,7 @@ package ranges;
  * @see FloatRange
  * @see FloatSearcher
  */
+@javax.annotation.Generated("StringTemplate")
 public interface FloatRangeSearcher extends FloatRange, FloatSearcher {
 
 	@Override

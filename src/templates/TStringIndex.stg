@@ -8,7 +8,7 @@ $var.importStatements:{x | import $x$;
  * @author TeamworkGuy2
  * @since 2015-1-2
  */
- @javax.annotation.Generated("StringTemplate")
+@javax.annotation.Generated("StringTemplate")
 public final class $var.className$ {
 
 	private $var.className$() { throw new AssertionError("cannot instantiate static class $var.className$"); }

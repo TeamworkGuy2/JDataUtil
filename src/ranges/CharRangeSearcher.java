@@ -6,6 +6,7 @@ package ranges;
  * @see CharRange
  * @see CharSearcher
  */
+@javax.annotation.Generated("StringTemplate")
 public interface CharRangeSearcher extends CharRange, CharSearcher {
 
 	@Override

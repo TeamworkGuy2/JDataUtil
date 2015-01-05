@@ -4,6 +4,7 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-10-29
  */
+@javax.annotation.Generated("StringTemplate")
 public final class CharRangeSearcherMutableImpl implements CharRangeSearcherMutable {
 	private primitiveCollections.CharArrayList rangePoints;
 	private final boolean locked;

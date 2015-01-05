@@ -4,6 +4,7 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-10-29
  */
+@javax.annotation.Generated("StringTemplate")
 public final class FloatRangeSearcherMutableImpl implements FloatRangeSearcherMutable {
 	private primitiveCollections.FloatArrayList rangePoints;
 	private final boolean locked;

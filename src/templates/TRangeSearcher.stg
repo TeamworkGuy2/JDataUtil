@@ -6,6 +6,7 @@ package $var.packageName$;
  * @since 2014-12-13
 $var.implementClassNames:{x |  * @see $x$
 }$ */
+@javax.annotation.Generated("StringTemplate")
 public interface $var.className$ extends $var.implementClassNames:{x | $x$}; separator=", "$ {
 
 	@Override

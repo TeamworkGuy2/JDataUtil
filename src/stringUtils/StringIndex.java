@@ -8,7 +8,7 @@ import java.util.RandomAccess;
  * @author TeamworkGuy2
  * @since 2015-1-2
  */
- @javax.annotation.Generated("StringTemplate")
+@javax.annotation.Generated("StringTemplate")
 public final class StringIndex {
 
 	private StringIndex() { throw new AssertionError("cannot instantiate static class StringIndex"); }

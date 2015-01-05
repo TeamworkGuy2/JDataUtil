@@ -6,6 +6,7 @@ import primitiveCollections.IntListSorted;
  * @author TeamworkGuy2
  * @since 2014-11-1
  */
+@javax.annotation.Generated("StringTemplate")
 public final class IntSearcherMutable implements IntSearcher {
 	private IntListSorted values;
 	private final boolean locked;

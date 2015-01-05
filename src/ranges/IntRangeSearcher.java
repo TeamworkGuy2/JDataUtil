@@ -6,6 +6,7 @@ package ranges;
  * @see IntRange
  * @see IntSearcher
  */
+@javax.annotation.Generated("StringTemplate")
 public interface IntRangeSearcher extends IntRange, IntSearcher {
 
 	@Override

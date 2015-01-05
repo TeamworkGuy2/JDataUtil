@@ -6,6 +6,7 @@ package $var.packageName$;
  * @author TeamworkGuy2
  * @since 2014-12-13
  */
+@javax.annotation.Generated("StringTemplate")
 public interface $var.className$ extends $var.implementClassNames:{x | $x$}; separator=", "$ {
 
 

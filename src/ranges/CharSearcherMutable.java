@@ -6,6 +6,7 @@ import primitiveCollections.CharListSorted;
  * @author TeamworkGuy2
  * @since 2014-11-1
  */
+@javax.annotation.Generated("StringTemplate")
 public final class CharSearcherMutable implements CharSearcher {
 	private CharListSorted values;
 	private final boolean locked;

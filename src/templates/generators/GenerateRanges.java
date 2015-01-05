@@ -1,10 +1,12 @@
-package templates;
+package templates.generators;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 
+import templates.RangeInfo;
+import templates.SearchSetInfo;
 import codeTemplate.TemplateUtil;
 
 /**

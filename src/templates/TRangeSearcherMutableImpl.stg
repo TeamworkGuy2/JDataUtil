@@ -5,6 +5,7 @@ package $var.packageName$;
  * @author TeamworkGuy2
  * @since 2014-10-29
  */
+@javax.annotation.Generated("StringTemplate")
 public final class $var.className$ implements $var.implementClassNames:{x | $x$}; separator=", "$ {
 	private $var.primitiveListImpl$ rangePoints;
 	private final boolean locked;

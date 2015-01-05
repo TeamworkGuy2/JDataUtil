@@ -174,6 +174,14 @@ public final class StringConvert {
 	}
 
 
+	/**
+	 * @see #unescape(CharSequence, int, int, char, char, Appendable)
+	 */
+	public static final int unescape(CharSequence src, int offset, char escapeChar, char chEnd, Appendable dst) {
+		return unescape(src, offset, src.length() - offset, escapeChar, chEnd, dst);
+	}
+
+
 	/** Unwrap a sequence of escaped characters.<br>
 	 * For example, a call:<br>
 	 * {@code unescape("a \\\"block\\\" char '\\\"'", 0, '\\', '"', new StringBuilder())}<br>
@@ -182,6 +190,7 @@ public final class StringConvert {
 	 * {@code a "block" char '"'}
 	 * @param src the input character sequence to read characters from
 	 * @param offset the offset into {@code src} at which to start unwrapping characters
+	 * @param length the number of characters to unwrap from {@code src} starting at {@code offset}
 	 * @param escapeChar the escape character to drop 
 	 * @param chEnd stop parsing when this character is encountered in the {@code src} stream
 	 * @param dst the destination to write unwrapped characters to
@@ -189,10 +198,10 @@ public final class StringConvert {
 	 * or the length of the {@code src} string if no {@code chEnd} character was encountered
 	 * @see StringModify#escape(CharSequence, char, char, char, Appendable) 
 	 */
-	public static final int unescape(CharSequence src, int offset, char escapeChar, char chEnd, Appendable dst) {
+	public static final int unescape(CharSequence src, int offset, int length, char escapeChar, char chEnd, Appendable dst) {
 		int i = offset;
 		try {
-			for(int size = src.length(); i < size; i++) {
+			for(int size = offset + length; i < size; i++) {
 				char chI = src.charAt(i);
 				if(chI == chEnd) {
 					return i;
@@ -213,17 +222,24 @@ public final class StringConvert {
 	}
 
 
+	/**
+	 * @see #unescapePartialQuoted(String, int, int, char, char, char, char, boolean, Appendable)
+	 */
 	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, Appendable dst) {
-		return unescapePartialQuoted(src, offset, escapeChar, quote, endCh1, endCh1, false, dst);
+		return unescapePartialQuoted(src, offset, src.length() - offset, escapeChar, quote, endCh1, endCh1, false, dst);
 	}
 
 
+	/**
+	 * @see #unescapePartialQuoted(String, int, int, char, char, char, char, boolean, Appendable)
+	 */
 	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, char endCh2, Appendable dst) {
-		return unescapePartialQuoted(src, offset, escapeChar, quote, endCh1, endCh2, false, dst);
+		return unescapePartialQuoted(src, offset, src.length() - offset, escapeChar, quote, endCh1, endCh2, false, dst);
 	}
 
 
-	/** Parse a sub-string until an ending character is reached, unless the ending character appears in a quoted section.
+	/** Parse a sub-string until an ending character is reached, unless the ending
+	 * character appears in a quoted section.
 	 * For example, if the ending characters are {@code ','} and {@code ']'}, and the {@code str} is:<br>
 	 * {@code "a string containing "quotes, [], and commas", further string"}<br>
 	 * the result is:<br>
@@ -231,23 +247,27 @@ public final class StringConvert {
 	 * 
 	 * @param src
 	 * @param offset
+	 * @param length
 	 * @param escapeChar
 	 * @param quote
 	 * @param endCh1
 	 * @param endCh2
-	 * @param throwIfNoEndChar true to throw an error if the string ends without an end char, false read until the end of the string
+	 * @param throwIfNoEndChar true to throw an error if the string ends without an end char,
+	 * false read until the end of the string
 	 * @param dst
 	 * @return the index of the {@code endCh#} that parsing stopped at, or the length
 	 * of the {@code src} string if no {@code endCh#} character was encountered 
 	 */
-	public static final int unescapePartialQuoted(String src, int offset, char escapeChar, char quote, char endCh1, char endCh2, boolean throwIfNoEndChar, Appendable dst) {
+	public static final int unescapePartialQuoted(String src, int offset, int length, char escapeChar, char quote,
+			char endCh1, char endCh2, boolean throwIfNoEndChar, Appendable dst) {
+		final int offLen = offset + length;
 		boolean added = false;
-		int endIndex = src.indexOf(endCh1, offset);
+		int endIndex = StringIndex.indexOf(src, offset, length, endCh1);
 		if(endIndex == -1) {
-			endIndex = src.indexOf(endCh2, offset);
+			endIndex = StringIndex.indexOf(src, offset, length, endCh2);
 		}
 		if(!throwIfNoEndChar && endIndex == -1) {
-			endIndex = src.length();
+			endIndex = offLen;
 		}
 		int quoteIndex = StringIndex.indexOf(src, offset, endIndex - offset, quote);
 		if(quoteIndex > -1 && quoteIndex < endIndex) {
@@ -259,7 +279,8 @@ public final class StringConvert {
 					throw new RuntimeException(e);
 				}
 			}
-			endIndex = StringConvert.unescape(src, quoteIndex + 1, escapeChar, quote, dst);
+			endIndex = StringConvert.unescape(src, quoteIndex + 1, offLen - (quoteIndex + 1), escapeChar, quote, dst) + 1;
+			if(endIndex > offLen) { endIndex = -1; }
 			if(offset < quoteIndex) {
 				try {
 					dst.append('"');
@@ -275,7 +296,7 @@ public final class StringConvert {
 				throw new IllegalArgumentException("string does not end properly, unquoted value did not end with '" + endCh1 + "' or '" + endCh2 + "'");
 			}
 			else {
-				endIndex = src.length();
+				endIndex = offLen;
 			}
 		}
 		else if(!added) {

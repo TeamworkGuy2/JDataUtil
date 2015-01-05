@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @author TeamworkGuy2
  * @since 2014-6-2
  */
+@javax.annotation.Generated("StringTemplate")
 public final class ArrayUtil {
 	public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 	public static final short[] EMPTY_SHORT_ARRAY = new short[0];
@@ -18,6 +19,9 @@ public final class ArrayUtil {
 	public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
 	public static final String[] EMPTY_STRING_ARRAY = new String[0];
 	public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+
+	private ArrayUtil() { throw new AssertionError("cannot instantiate static class ArrayUtil"); }
 
 
 	// start boolean array methods

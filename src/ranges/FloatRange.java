@@ -10,6 +10,7 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-12-13
  */
+@javax.annotation.Generated("StringTemplate")
 public interface FloatRange {
 
 	/**

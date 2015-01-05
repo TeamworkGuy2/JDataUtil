@@ -4,6 +4,7 @@ package ranges;
  * @author TeamworkGuy2
  * @since 2014-12-13
  */
+@javax.annotation.Generated("StringTemplate")
 public interface FloatSearcher {
 
 	/** Check if {@code val} matches one of the ranges specified by this FloatSearcher

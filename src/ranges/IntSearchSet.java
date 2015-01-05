@@ -7,6 +7,7 @@ import primitiveCollections.IntListSorted;
  * @author TeamworkGuy2
  * @since 2014-11-2
  */
+@javax.annotation.Generated("StringTemplate")
 public final class IntSearchSet implements IntSearcher {
 	private IntListSorted values;
 	private IntRangeSearcherMutableImpl ranges;

@@ -8,6 +8,7 @@ $var.importStatements:{x | $x$
  * @author TeamworkGuy2
  * @since 2014-11-2
  */
+@javax.annotation.Generated("StringTemplate")
 public final class $var.className$ implements $var.implementClassNames:{x | $x$}; separator=", "$ {
 	private $var.valuesCollectionClassName$ values;
 	private $var.rangesCollectionClassName$ ranges;

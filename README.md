@@ -17,7 +17,7 @@ methods for assertions and checks for conformance of methods like equals(), hash
 ####dataType/
 data type enums and data type converters
 
-####dataUtility/
+####dataUtils/
 builders for Map.Entry, Map, List, Set, etc. Also conversion of property-file style strings
 
 ####functionUtils/
@@ -32,8 +32,14 @@ specific numeric functions used by some previous projects
 ####ranges/
 Classes for representing, searching, and manipulating integer and char ranges
 
-####stringUtils
+####stringUtils/
 string indexOf, comparison, replace, and transformation methods
 
+####templates/
+ANTLR StringTemplate templates for generating many of the ranges/, arrayUtils/, and stringUtils/ classes
+
+####templates/generators/
+Generator classes for generating many of the ranges/, arrayUtils/, and stringUtils/ classes using the templates in 'templates/'
+
 ####tests/
-basic tests and example code
+JUnit tests and example code

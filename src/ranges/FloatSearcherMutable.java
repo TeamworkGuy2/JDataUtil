@@ -6,6 +6,7 @@ import primitiveCollections.FloatListSorted;
  * @author TeamworkGuy2
  * @since 2014-11-1
  */
+@javax.annotation.Generated("StringTemplate")
 public final class FloatSearcherMutable implements FloatSearcher {
 	private FloatListSorted values;
 	private final boolean locked;

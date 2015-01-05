@@ -13,6 +13,7 @@ public class StringConvertTest {
 
 	@Test
 	public void unescapeTest() {
+		int offset = 2;
 		String[] inputs = new String[] {
 				" -a \\\"block\\\" char '\\\"'",
 				"1. \\\\abc",
@@ -28,7 +29,7 @@ public class StringConvertTest {
 		StringBuilder dst = new StringBuilder();
 
 		for(int i = 0, size = inputs.length; i < size; i++) {
-			StringConvert.unescape(inputs[i], 2, '\\', '"', dst);
+			StringConvert.unescape(inputs[i], offset, '\\', '"', dst);
 			Assert.assertEquals(expect[i], dst.toString());
 			dst.setLength(0);
 		}
@@ -37,11 +38,12 @@ public class StringConvertTest {
 
 	@Test
 	public void unescapePartialQuotedTest() {
+		int offset = 3;
 		String[] inputs = new String[] {
-				"with \"quoted block\"",
-				" \\abc, xyz",
-				" abc, xyz",
-				"\\\"\"",
+				"0. with \"quoted block\"",
+				"1.  \\abc, xyz",
+				"2.  abc, xyz",
+				"3. \\\"\"",
 		};
 		String[] expect = new String[] {
 				"with \"quoted block\"",
@@ -49,11 +51,18 @@ public class StringConvertTest {
 				" abc",
 				"\\\"\"",
 		};
+		int[] expectIndex = {
+				inputs[0].length(),
+				inputs[1].lastIndexOf(','),
+				inputs[2].lastIndexOf(','),
+				inputs[3].length()
+		};
 		StringBuilder dst = new StringBuilder();
 
 		for(int i = 0, size = inputs.length; i < size; i++) {
-			StringConvert.unescapePartialQuoted(inputs[i], 0, '\\', '"', ',', ']', dst);
+			int index = StringConvert.unescapePartialQuoted(inputs[i], offset, inputs[i].length() - offset, '\\', '"', ',', ']', false, dst);
 			Assert.assertEquals(expect[i], dst.toString());
+			Assert.assertEquals("expect (" + expectIndex[i] + "): " + expect[i] + ", result (" + index + "): " + dst.toString(), expectIndex[i], index);
 			dst.setLength(0);
 		}
 	}
