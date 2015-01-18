@@ -1,12 +1,9 @@
 package templates.generators;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.Arrays;
 
 import templates.ArrayInfo;
-import templates.ArrayInfo.ArrayType;
 import codeTemplate.TemplateUtil;
 
 /**
@@ -33,9 +30,7 @@ public class GenerateArrayUtils {
 				new ArrayInfo.ArrayType("T",		true, "<T>", null, ".equals",	null, null, Object.class, Object.class, false)
 				);
 
-		Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-		TemplateUtil.renderObjectTemplate("src/templates/TArrayUtil.stg", "TArrayUtil", info, out);
-		out.close();
+		TemplateUtil.renderTemplate("src/templates/TArrayUtil.stg", "TArrayUtil", info);
 	}
 
 

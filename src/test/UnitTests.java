@@ -10,10 +10,6 @@ public class UnitTests {
 
 
 	public static void main(String[] args) throws ParseException {
-		BuilderTests.testListAddUtil();
-		StringTests.stringJoin();
-		//ArrayTests.testArraySums();
-		//ArrayTests.testArrayAvg();
 		//stringReplaceTest();
 		//charSearchRangeTest();
 		//DateTimeTest.formatParseDateTimeTest();

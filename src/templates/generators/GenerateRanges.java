@@ -1,12 +1,13 @@
 package templates.generators;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.Arrays;
+
+import org.stringtemplate.v4.ST;
 
 import templates.RangeInfo;
 import templates.SearchSetInfo;
+import codeTemplate.PrimitiveTemplates;
 import codeTemplate.TemplateUtil;
 
 /**
@@ -17,29 +18,15 @@ public class GenerateRanges {
 
 
 	public static final void generateRangeClasses() throws IOException {
-		SearchSetInfo charRange = new SearchSetInfo();
-		SearchSetInfo intRange = new SearchSetInfo();
-		SearchSetInfo floatRange = new SearchSetInfo();
+		SearchSetInfo charRange = PrimitiveTemplates.newCharTemplate(new SearchSetInfo(), "", "ranges");
+		SearchSetInfo intRange = PrimitiveTemplates.newIntTemplate(new SearchSetInfo(), "", "ranges");
+		SearchSetInfo floatRange = PrimitiveTemplates.newFloatTemplate(new SearchSetInfo(), "", "ranges");
 		SearchSetInfo[] infos = new SearchSetInfo[] { charRange, intRange, floatRange };
 
 		// generates XyzRange interfaces
 		charRange.className = "CharRange";
-		charRange.implementClassNames = Arrays.asList();
-		charRange.objectType = "Character";
-		charRange.packageName = "ranges";
-		charRange.type = "char";
-
 		intRange.className = "IntRange";
-		intRange.implementClassNames = Arrays.asList();
-		intRange.objectType = "Integer";
-		intRange.packageName = "ranges";
-		intRange.type = "int";
-
 		floatRange.className = "FloatRange";
-		floatRange.implementClassNames = Arrays.asList();
-		floatRange.objectType = "Float";
-		floatRange.packageName = "ranges";
-		floatRange.type = "float";
 
 		generateRanges(infos);
 
@@ -100,21 +87,18 @@ public class GenerateRanges {
 
 		// generates XyzSearchSet classes
 		charRange.className = "CharSearchSet";
-		charRange.typeUpperCase = "Char";
 		charRange.importStatements = Arrays.asList("import primitiveCollections.CharListSorted;");
 		charRange.implementClassNames = Arrays.asList("CharSearcher");
 		charRange.valuesCollectionClassName = "CharListSorted";
 		charRange.rangesCollectionClassName = "CharRangeSearcherMutableImpl";
 
 		intRange.className = "IntSearchSet";
-		intRange.typeUpperCase = "Int";
 		intRange.importStatements = Arrays.asList("import primitiveCollections.IntListSorted;");
 		intRange.implementClassNames = Arrays.asList("IntSearcher");
 		intRange.valuesCollectionClassName = "IntListSorted";
 		intRange.rangesCollectionClassName = "IntRangeSearcherMutableImpl";
 
 		floatRange.className = "FloatSearchSet";
-		floatRange.typeUpperCase = "Float";
 		floatRange.importStatements = Arrays.asList("import primitiveCollections.FloatListSorted;");
 		floatRange.implementClassNames = Arrays.asList("FloatSearcher");
 		floatRange.valuesCollectionClassName = "FloatListSorted";
@@ -139,64 +123,57 @@ public class GenerateRanges {
 
 
 	public static final void generateRanges(RangeInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TRange.stg", "TRange");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TRange.stg", "TRange", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateSearchers(RangeInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TSearcher.stg", "TSearcher");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TSearcher.stg", "TSearcher", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateRangeSearchers(RangeInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TRangeSearcher.stg", "TRangeSearcher");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TRangeSearcher.stg", "TRangeSearcher", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateRangeSearcherMutables(RangeInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TRangeSearcherMutable.stg", "TRangeSearcherMutable");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TRangeSearcherMutable.stg", "TRangeSearcherMutable", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateRangeSearcherMutableImpls(RangeInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TRangeSearcherMutableImpl.stg", "TRangeSearcherMutableImpl");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TRangeSearcherMutableImpl.stg", "TRangeSearcherMutableImpl", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateRangeSearcherSet(SearchSetInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TSearchSet.stg", "TSearchSet");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TSearchSet.stg", "TSearchSet", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 
 
 	public static final void generateSearcherMutable(SearchSetInfo... infos) throws IOException {
+		ST tmpl = TemplateUtil.createTemplate("src/templates/TSearcherMutable.stg", "TSearcherMutable");
 		for(RangeInfo info : infos) {
-			Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-			TemplateUtil.renderObjectTemplate("src/templates/TSearcherMutable.stg", "TSearcherMutable", info, out);
-			out.close();
+			TemplateUtil.renderTemplate(tmpl, info);
 		}
 	}
 

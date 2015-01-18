@@ -1,12 +1,12 @@
 package templates;
 
-import codeTemplate.ClassTemplateInfo;
+import codeTemplate.PrimitiveClassTemplate;
 
 /**
  * @author TeamworkGuy2
  * @since 2014-12-24
  */
-public class RangeInfo extends ClassTemplateInfo {
+public class RangeInfo extends PrimitiveClassTemplate {
 	/** the name of an immutable version of this class */
 	public String immutableClassName;
 	/** the name of the primitive list interface to use */

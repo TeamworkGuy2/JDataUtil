@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import primitiveCollections.IntArrayList;
 import ranges.Ranges;
+import stringUtils.StringCase;
 import stringUtils.StringCommonality;
 import stringUtils.StringConvert;
 import stringUtils.StringIndex;
@@ -44,7 +45,8 @@ public class StringTests {
 	}
 
 
-	public static void stringSplitTest() {
+	@Test
+	public void stringSplitTest() {
 		String[] matches = new String[] {
 				"a somewhat very long string without any matching values except at the end //",
 				"something shorter//split into pieces//at least I hope//so",
@@ -57,13 +59,13 @@ public class StringTests {
 				"5//",
 		};
 		for(String match : matches) {
-			System.out.println(Arrays.toString(StringModify.split(match, "//", 5)));
-			System.out.println(Arrays.toString(match.split("//", 5)));
+			Assert.assertArrayEquals(match.split("//", 5), StringModify.split(match, "//", 5));
 		}
 	}
 
 
-	public static void charSearchRangeTest() {
+	@Test
+	public void charSearchRangeTest() {
 		int[] duplicateRanges = new int[] {
 				1, 2,
 				3, 5,
@@ -73,7 +75,7 @@ public class StringTests {
 		};
 		IntArrayList duplicateRangeList = new IntArrayList(duplicateRanges, 0, duplicateRanges.length);
 		System.out.println("with duplicate ranges:\t\t" + duplicateRangeList);
-		Ranges.throwIfDuplicateRanges(duplicateRangeList);
+		Check.assertException(() -> Ranges.throwIfDuplicateRanges(duplicateRangeList));
 		System.out.println("removed duplicate ranges:\t" + duplicateRangeList);
 
 		int[][] ranges = new int[][] {
@@ -88,6 +90,7 @@ public class StringTests {
 		Boolean[] expectedOverlap = new Boolean[] { true, true, false, true, false, true };
 		// expected range overlap counts
 		Integer[] expectedOverlapCount = new Integer[] { 2, 4, 0, 1, 0, 1 };
+
 		for(int i = 0, size = ranges.length; i < size; i ++) {
 			System.out.println("range [" + ranges[i][0] + ", " + ranges[i][1] +
 					"], to [" + ranges[i][2] + ", " + ranges[i][3] + "], overlap: " +
@@ -95,14 +98,15 @@ public class StringTests {
 					", count: " + Ranges.rangeOverlapCount(ranges[i][0], ranges[i][1], ranges[i][2], ranges[i][3]));
 		}
 
-		Check.checkTests(ranges, expectedOverlap, "", "",
+		Check.assertTests(ranges, expectedOverlap, "", "",
 				(range) -> Ranges.doRangesOverlap(range[0], range[1], range[2], range[3]));
-		Check.checkTests(ranges, expectedOverlapCount, "", "",
+		Check.assertTests(ranges, expectedOverlapCount, "", "",
 				(range) -> Ranges.rangeOverlapCount(range[0], range[1], range[2], range[3]));
 	}
 
 
-	public static void listUtilAddTest() {
+	@Test
+	public void listUtilAddTest() {
 		@SuppressWarnings("unchecked")
 		List<String>[] lists = new List[] {
 				Arrays.asList("a", "unique", "list"),
@@ -112,11 +116,12 @@ public class StringTests {
 		};
 		Boolean[] expect = new Boolean[] { true, false, true, true };
 
-		Check.checkTests(lists, expect, "", "", (list) -> ListUtil.isUnique(list));
+		Check.assertTests(lists, expect, "", "", (list) -> ListUtil.isUnique(list));
 	}
 
 
-	public static void indexOfNotPrefixedByTest() {
+	@Test
+	public void indexOfNotPrefixedByTest() {
 		{
 			String[] strs = new String[] {	"string //!#with !#text", "!#", "//!#!#", "and //!#///!#", "/!#//!#"};
 			Integer[] expect = new Integer[] {16, 0, 4, -1, 1};
@@ -128,7 +133,7 @@ public class StringTests {
 			char[] strC = str.toCharArray();
 			char[] prefixC = prefix.toCharArray();
 
-			Check.checkTests(strs, expect, "index of " + str + " without " + prefix + " prefix ", "",
+			Check.assertTests(strs, expect, "index of " + str + " without " + prefix + " prefix ", "",
 					(s) -> StringIndex.indexOfNotPrefixedBy(s.toCharArray(), 0, strC, strOff, prefixC, prefixOff));
 		}
 
@@ -143,7 +148,7 @@ public class StringTests {
 			char[] strC2 = str2.toCharArray();
 			char[] prefixC2 = prefix2.toCharArray();
 
-			Check.checkTests(strs2, expect2, "index of " + str2 + " without " + prefix2 + " prefix ", "",
+			Check.assertTests(strs2, expect2, "index of " + str2 + " without " + prefix2 + " prefix ", "",
 					(s) -> StringIndex.indexOfNotPrefixedBy(s.toCharArray(), 0, strC2, strOff2, prefixC2, prefixOff2));
 		}
 
@@ -157,7 +162,7 @@ public class StringTests {
 			int prefixOff = 0;
 			char[] prefixC = prefix.toCharArray();
 
-			Check.checkTests(strs2, expect2, "index of " + str2 + " without " + prefix + " prefix ", "",
+			Check.assertTests(strs2, expect2, "index of " + str2 + " without " + prefix + " prefix ", "",
 					(s) -> {
 						int index = StringIndex.indexOfMatchNotPrefixedBy(s.toCharArray(), 0, matchStrs, prefixC, prefixOff);
 						if(index > -1) {
@@ -169,55 +174,80 @@ public class StringTests {
 	}
 
 
-	public static void stringJoin() {
+	@Test
+	public void stringJoin() {
 		String[][] strs = new String[][] { { "Aa", "Bb" }, { "123", "_", ".." }, { "", "" }, { "" } };
 		String[] delimiters = new String[] { "-", "||", "=", "=" };
 		String[] expect = new String[] { "Aa-Bb", "123||_||..", "=", "" };
 
-		Check.checkTests(strs, expect, "", "", (s, i) -> StringModify.join(s, delimiters[i]));
+		Check.assertTests(strs, expect, "", "", (s, i) -> StringModify.join(s, delimiters[i]));
 	}
 
 
-	public static void stringReplaceTest() {
+	@Test
+	public void stringReplaceTest() {
 		{
-			String[] strs = new String[] { 	"&amp; with &lt; or &gt;",	"*** or ** * ***",	"***",	"*** a six***seven***" };
-			String[] expect = new String[] {"& with < or >",			"* or ** * *",		"*",	"* a six*seven*" };
+			String[] strs = new String[] {   "&amp; with &lt; or &gt;", "*** or ** * ***", "***", "*** a six***seven***" };
+			String[] expect = new String[] { "& with < or >",           "* or ** * *",     "*",   "* a six*seven*" };
 
 			List<String> searchStrs = Arrays.asList("***", "&amp;", "&lt;", "&gt;");
 			List<String> replaceStrs = Arrays.asList("*", "&", "<", ">");
 
-			Check.checkTests(strs, expect, "", "",
+			Check.assertTests(strs, expect, "", "",
 					(s) -> StringReplace.replaceStrings(s, 0, searchStrs, replaceStrs));
 		}
 
 		{
-			String[] strs2 = new String[] {		"&lt;+=&lt; or &gt;",	"*** or ** * ***",	"***",	"*** a six***seven***" };
-			String[] expect2 = new String[] {	"&lt;+=< or >",			"*** or ** * *",	"***",	"*** a six*seven*" };
+			String[] strs2 = new String[] {   "&lt;+=&lt; or &gt;", "*** or ** * ***", "***", "*** a six***seven***" };
+			String[] expect2 = new String[] { "&lt;+=< or >",       "*** or ** * *",   "***", "*** a six*seven*" };
 
 			List<String> searchStrs2 = Arrays.asList("***", "&amp;", "&lt;", "&gt;");
 			List<String> replaceStrs2 = Arrays.asList("*", "&", "<", ">");
 
 			int strOffset = 6;
-			Check.checkTests(strs2, expect2, "", "",
+			Check.assertTests(strs2, expect2, "", "",
 					(s) -> StringReplace.replaceStrings(s, strOffset, searchStrs2, replaceStrs2));
 		}
 	}
 
 
-	public static void commonPrefixSuffixTest() {
+	@Test
+	public void commonPrefixSuffixTest() {
 		// prefix
 		{
-			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
+			String[][] strs = new String[][] { { "" }, { "a_b", "a_b_c" }, { "this.that", "this_that" }, { "abc", "c" } };
 			String[] expect = new String[] { "", "a_b", "this", "" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringCommonality.findPrefix(0, strSet));
+			Check.assertTests(strs, expect, "", "", (strSet) -> StringCommonality.findPrefix(0, strSet));
 		}
 		// suffix
 		{
-			String[][] strs = new String[][] { {""}, {"a_b", "a_b_c"}, {"this.that", "this_that"}, {"abc", "c"} };
+			String[][] strs = new String[][] { { "" }, { "a_b", "a_b_c" }, { "this.that", "this_that" }, { "abc", "c" } };
 			String[] expect = new String[] { "", "", "that", "c" };
 
-			Check.checkTests(strs, expect, "", "", (strSet) -> StringCommonality.findSuffix(0, strSet));
+			Check.assertTests(strs, expect, "", "", (strSet) -> StringCommonality.findSuffix(0, strSet));
+		}
+	}
+
+
+	@Test
+	public void stringCaseTest() {
+		String[] strs = new String[] { "abc", "Alpha", "Subpar", "SupPar", "Al_Cid", "var_val_byte", "A_", "_A", "a", "_" };
+		String[] camelCase = new String[] { "abc", "alpha", "subpar", "supPar", "alCid", "varValByte", "a", "a", "a", "_" };
+		String[] titleCase = new String[] { "Abc", "Alpha", "Subpar", "SupPar", "AlCid", "VarValByte", "A", "A", "A", "_" };
+		String[] underscoreLowerCase = new String[] { "abc", "alpha", "subpar", "sup_par", "al_cid", "var_val_byte", "a_", "_a", "a", "_" };
+		String[] underscoreTitleCase = new String[] { "Abc", "Alpha", "Subpar", "Sup_Par", "Al_Cid", "Var_Val_Byte", "A_", "_A", "A", "_" };
+
+		for(int i = 0, size = strs.length; i < size; i++) {
+			Assert.assertEquals("camelCase", StringCase.toCamelCase(strs[i]), camelCase[i]);
+			Assert.assertEquals("TitleCase", StringCase.toTitleCase(strs[i]), titleCase[i]);
+			Assert.assertEquals("underscoreLowerCase", StringCase.toUnderscoreLowerCase(strs[i]), underscoreLowerCase[i]);
+			Assert.assertEquals("underscoreTitleCase", StringCase.toUnderscoreTitleCase(strs[i]), underscoreTitleCase[i]);
+			/*System.out.println("str: " + str +
+					",\tcamelCase: " + StringCase.toCamelCase(str) +
+					",\tTitleCase: " + StringCase.toTitleCase(str) +
+					",\tunderscore_lower_case: " + StringCase.toUnderscoreLowerCase(str) +
+					",\tUnderscore_Upper_Case: " + StringCase.toUnderscoreTitleCase(str));*/
 		}
 	}
 

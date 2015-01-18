@@ -1,5 +1,6 @@
 package checks;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -203,11 +204,12 @@ public final class Check {
 		for(int i = 0, size = inputs.length; i < size; i++) {
 			R res = action.apply(inputs[i]);
 			if(!res.equals(expected[i])) {
-				throw new Error(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
-						expected[i] + "'");
+				throw new Error(errorMessage + ", input " + i + ": '" + toDescriptiveString(res) + "' does not match expected: '" +
+						toDescriptiveString(expected[i]) + "'");
 			}
 			else if(perCheckMessage != null) {
-				System.out.println(perCheckMessage + "input " + i + ": '" + res + "' to: '" + expected[i] + "'");
+				System.out.println(perCheckMessage + "input " + i + ": '" + toDescriptiveString(res) +
+						"' to: '" + toDescriptiveString(expected[i]) + "'");
 			}
 		}
 	}
@@ -220,11 +222,12 @@ public final class Check {
 		for(int i = 0, size = inputs.length; i < size; i++) {
 			R res = action.apply(inputs[i], i);
 			if(!res.equals(expected[i])) {
-				throw new Error(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
-						expected[i] + "'");
+				throw new Error(errorMessage + ", input " + i + ": '" + toDescriptiveString(res) + "' does not match expected: '" +
+						toDescriptiveString(expected[i]) + "'");
 			}
 			else if(perCheckMessage != null) {
-				System.out.println(perCheckMessage + "input " + i + ": '" + res + "' to: '" + expected[i] + "'");
+				System.out.println(perCheckMessage + "input " + i + ": '" + toDescriptiveString(res) +
+						"' to: '" + toDescriptiveString(expected[i]) + "'");
 			}
 		}
 	}
@@ -238,32 +241,23 @@ public final class Check {
 	}
 
 
-	/**
+	/** Assert that the task throws an {@link Exception}
 	 * @param task the action to perform
-	 * @param throwIfNoError true to throw an error if {@code task} does not
-	 * throw an {@code Exception}
-	 * @return true if the task did not throw an error, false if it did not throw an error
 	 */
-	public static final boolean assertException(boolean throwIfNoError, Runnable task) {
+	public static final void assertException(Runnable task) {
 		Throwable error = null;
 		try {
 			task.run();
 		} catch(Exception e) {
 			error = e;
 		} finally {
-			if(throwIfNoError) {
-				Assert.assertTrue("task was expected to throw error but did not", error == null);
-			}
+			Assert.assertTrue("task was expected to throw error but did not", error != null);
 		}
-		return error == null;
 	}
 
 
-	/**
+	/** Assert that the task throws a {@link Throwable}
 	 * @param task the action to perform
-	 * @param throwIfNoError true to throw an error if {@code task} does not
-	 * throw a {@code Throwable}
-	 * @return true if the task did not throw an error, false if it did not throw an error
 	 */
 	public static final void assertThrowable(boolean throwIfNoError, Runnable task) {
 		Throwable error = null;
@@ -272,9 +266,7 @@ public final class Check {
 		} catch(Throwable e) {
 			error = e;
 		} finally {
-			if(throwIfNoError) {
-				Assert.assertTrue("task was expected to throw error but did not", error == null);
-			}
+			Assert.assertTrue("task was expected to throw error but did not", error != null);
 		}
 	}
 
@@ -296,8 +288,8 @@ public final class Check {
 
 		for(int i = 0, size = inputs.length; i < size; i++) {
 			R res = action.apply(inputs[i]);
-			Assert.assertEquals(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
-						expected[i] + "'", expected[i], res);
+			Assert.assertEquals(errorMessage + ", input " + i + ": '" + toDescriptiveString(res) + "' does not match expected: '" +
+					toDescriptiveString(expected[i]) + "'", expected[i], res);
 		}
 	}
 
@@ -308,14 +300,19 @@ public final class Check {
 
 		for(int i = 0, size = inputs.length; i < size; i++) {
 			R res = action.apply(inputs[i], i);
-			Assert.assertEquals(errorMessage + ", input " + i + ": '" + res + "' does not match expected: '" +
-					expected[i] + "'", expected[i], res);
+			Assert.assertEquals(errorMessage + ", input " + i + ": '" + toDescriptiveString(res) + "' does not match expected: '" +
+					toDescriptiveString(expected[i]) + "'", expected[i], res);
 		}
 	}
 
 
 	private static final void assertLengthEqual(int len1, int len2) {
 		Assert.assertEquals("inputs (length: " + len1 + ") should be equal in length to (length: " + len2 + ")", len1, len2);
+	}
+
+
+	private static final <T> String toDescriptiveString(T obj) {
+		return obj.getClass().isArray() ? Arrays.toString((Object[])obj) : obj.toString();
 	}
 
 }

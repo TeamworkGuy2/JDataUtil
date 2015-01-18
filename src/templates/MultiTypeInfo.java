@@ -3,7 +3,7 @@ package templates;
 import java.util.ArrayList;
 import java.util.List;
 
-import codeTemplate.ClassTemplateInfo;
+import codeTemplate.ClassTemplate;
 
 /**
  * @param <T> the {@link ClassTemplateInfo} type of the data stored in this multi type info list
@@ -11,7 +11,7 @@ import codeTemplate.ClassTemplateInfo;
  * @author TeamworkGuy2
  * @since 2015-2-1
  */
-public class MultiTypeInfo<T extends ClassTemplateInfo> extends ClassTemplateInfo {
+public class MultiTypeInfo<T extends ClassTemplate> extends ClassTemplate {
 	public List<MultiType<T>> types;
 
 
@@ -26,7 +26,7 @@ public class MultiTypeInfo<T extends ClassTemplateInfo> extends ClassTemplateInf
 	 * @author TeamworkGuy2
 	 * @since 2015-2-1
 	 */
-	public static class MultiType<T extends ClassTemplateInfo> {
+	public static class MultiType<T extends ClassTemplate> {
 		public T t1;
 		public T t2;
 		public T t3;

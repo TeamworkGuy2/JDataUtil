@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 import templates.MultiTypeInfo;
 import templates.RandomAccessTypeInfo;
-import templates.MultiTypeInfo.MultiType;
 import codeTemplate.TemplateUtil;
 import dataUtils.Entries;
 
@@ -41,7 +40,7 @@ public class GenerateStringIndex {
 		info.types.add(new MultiTypeInfo.MultiType<>(charArrayType, charArrayType));
 
 		Writer out = new FileWriter(TemplateUtil.getSrcRelativePath(info).toFile());
-		TemplateUtil.renderObjectTemplate("src/templates/TStringIndex.stg", "TStringIndex", out,
+		TemplateUtil.renderTemplate("src/templates/TStringIndex.stg", "TStringIndex", out,
 				Entries.of("var", info),
 				Entries.of("singleTypes", Arrays.asList(stringType, charArrayType)));
 		out.close();

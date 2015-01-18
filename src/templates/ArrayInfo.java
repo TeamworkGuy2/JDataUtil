@@ -2,13 +2,14 @@ package templates;
 
 import java.util.List;
 
-import codeTemplate.ClassTemplateInfo;
+import codeTemplate.ClassTemplate;
+import codeTemplate.PrimitiveClassTemplate;
 
 /**
  * @author TeamworkGuy2
  * @since 2014-12-28
  */
-public class ArrayInfo extends ClassTemplateInfo {
+public class ArrayInfo extends ClassTemplate {
 	public List<ArrayType> types;
 
 
@@ -18,7 +19,7 @@ public class ArrayInfo extends ClassTemplateInfo {
 	 * @author TeamworkGuy2
 	 * @since 2014-12-28
 	 */
-	public static class ArrayType extends ClassTemplateInfo {
+	public static class ArrayType extends PrimitiveClassTemplate {
 		public boolean isGeneric;
 		public String genericSignature;
 		public String checkEquality;

@@ -73,7 +73,7 @@ public final class $var.className$ implements $var.implementClassNames:{x | $x$}
 	}
 
 
-	public void add$var.typeUpperCase$($var.type$ value) {
+	public void add$var.typeShortUpperCase$($var.type$ value) {
 		checkLocked();
 		if(values.indexOf(value) > -1) {
 			throw new IllegalArgumentException("duplicate searcher $var.type$ '" + value + "'");
@@ -82,14 +82,14 @@ public final class $var.className$ implements $var.implementClassNames:{x | $x$}
 	}
 
 
-	public boolean remove$var.typeUpperCase$At(int index) {
+	public boolean remove$var.typeShortUpperCase$At(int index) {
 		checkLocked();
 		values.remove(index);
 		return true;
 	}
 
 
-	public boolean remove$var.typeUpperCase$($var.type$ value) {
+	public boolean remove$var.typeShortUpperCase$($var.type$ value) {
 		checkLocked();
 		int index = values.indexOf(value);
 		if (index == -1) {

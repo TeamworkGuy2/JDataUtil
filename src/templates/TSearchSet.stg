@@ -3,7 +3,7 @@ package $var.packageName$;
 
 $var.importStatements:{x | $x$
 }$
-/** A {@link $var.implementClassNames$} that contains a {@link $var.typeUpperCase$Range}
+/** A {@link $var.implementClassNames$} that contains a {@link $var.typeShortUpperCase$Range}
  * and a {@link CharSearcherMutable}
  * @author TeamworkGuy2
  * @since 2014-11-2
@@ -50,7 +50,7 @@ public final class $var.className$ implements $var.implementClassNames:{x | $x$}
 	}
 
 
-	public void add$var.typeUpperCase$($var.type$ ch) {
+	public void add$var.typeShortUpperCase$($var.type$ ch) {
 		checkLocked();
 		if(values.contains(ch)) {
 			throw new IllegalArgumentException("duplicate searcher $var.type$ '" + ch + "'");
@@ -59,14 +59,14 @@ public final class $var.className$ implements $var.implementClassNames:{x | $x$}
 	}
 
 
-	public boolean remove$var.typeUpperCase$At(int index) {
+	public boolean remove$var.typeShortUpperCase$At(int index) {
 		checkLocked();
 		values.remove(index);
 		return false;
 	}
 
 
-	public boolean remove$var.typeUpperCase$($var.type$ ch) {
+	public boolean remove$var.typeShortUpperCase$($var.type$ ch) {
 		checkLocked();
 		return values.removeValue(ch);
 	}
