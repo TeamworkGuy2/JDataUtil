@@ -32,9 +32,6 @@ specific numeric functions used by some previous projects
 ####ranges/
 Classes for representing, searching, and manipulating integer and char ranges
 
-####stringUtils/
-string indexOf, comparison, replace, and transformation methods
-
 ####templates/
 ANTLR StringTemplate templates for generating many of the ranges/, arrayUtils/, and stringUtils/ classes
 
