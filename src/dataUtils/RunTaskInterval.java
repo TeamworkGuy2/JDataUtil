@@ -97,6 +97,7 @@ public final class RunTaskInterval implements Runnable {
 	/** Calculate if the internal task should be run based on past update
 	 * times and the current {@link System#nanoTime()} to match the requested frequency.
 	 */
+	@Override
 	public void run() {
 		updateTaskTime(System.nanoTime());
 	}

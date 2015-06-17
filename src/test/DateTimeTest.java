@@ -3,8 +3,14 @@ package test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.junit.Test;
+
+import checks.Check;
+import checks.CheckTask;
 import dataUtils.DateTimeConverter;
 
 /**
@@ -12,6 +18,37 @@ import dataUtils.DateTimeConverter;
  * @since 2014-12-2
  */
 public class DateTimeTest {
+
+
+	@Test
+	public void testDateTimeParsing() {
+		String[] strs = {
+			"2015-3-30",
+			"1899-12-13",
+			"5020-2-5"
+		};
+
+
+		ZoneId zone = ZoneId.of("Z");
+
+		@SuppressWarnings("deprecation")
+		ZonedDateTime[] expected = new ZonedDateTime[] {
+				ZonedDateTime.ofInstant(new Date(2015 - 1900, 3 - 1, 30).toInstant(), zone),
+				ZonedDateTime.ofInstant(new Date(1899 - 1900, 12 - 1, 13).toInstant(), zone),
+				ZonedDateTime.ofInstant(new Date(5020 - 1900, 2 - 1, 5).toInstant(), zone)
+		};
+
+		SimpleDateFormat formatter = new SimpleDateFormat(DateTimeConverter.ISO_8601_DATE_FORMAT_STRING);
+		CheckTask.assertTests(strs, expected, (str, idx) -> {
+			try {
+				ZonedDateTime zdt = ZonedDateTime.ofInstant(formatter.parse(str).toInstant(), zone);
+				System.out.println(zdt + " | " + expected[idx]);
+				return zdt;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
 
 
 	public static void formatParseDateTimeTest() throws ParseException {

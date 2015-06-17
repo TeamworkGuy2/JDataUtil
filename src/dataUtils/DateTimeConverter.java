@@ -1,7 +1,10 @@
 package dataUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -90,6 +93,31 @@ public final class DateTimeConverter {
 
 	public static final DateTimeConverter getDefaultInstance() {
 		return defaultInstance;
+	}
+
+
+	public static ZonedDateTime parseIso8601Date(String str, ZoneId zone) {
+		return parseFromFormatter(getDefaultInstance().iso8601DateFormatter, str, zone);
+	}
+
+
+	public static ZonedDateTime parseIso8601DateTime(String str, ZoneId zone) {
+		return parseFromFormatter(getDefaultInstance().iso8601DateTimeFormatter, str, zone);
+	}
+
+
+	public static ZonedDateTime parseRfc822DateTime(String str, ZoneId zone) {
+		return parseFromFormatter(getDefaultInstance().rfc822Formatter, str, zone);
+	}
+
+
+	public static ZonedDateTime parseFromFormatter(SimpleDateFormat formatter, String str, ZoneId zone) {
+		try {
+			Instant instant = formatter.parse(str).toInstant();
+			return ZonedDateTime.ofInstant(instant, zone);
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 
