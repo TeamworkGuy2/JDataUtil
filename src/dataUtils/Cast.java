@@ -10,7 +10,7 @@ public class Cast {
 
 	/** Unchecked cast from type A to type B
 	 */
-	public static <A, B> B cast(A obj) {
+	static <A, B> B cast(A obj) {
 		@SuppressWarnings("unchecked")
 		B res = (B)((Object)obj);
 		return res;
@@ -22,7 +22,7 @@ public class Cast {
 	 * when the source is an implementation that won't throw an error,
 	 * such as {@link StringBuilder} or {@link StringReader}.
 	 */
-	public static RuntimeException toRuntimeException(Throwable err) {
+	static RuntimeException toRuntimeException(Throwable err) {
 		return cast(err);
 	}
 

@@ -9,7 +9,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import checks.Check;
 import checks.CheckTask;
 import dataUtils.DateTimeConverter;
 
@@ -39,7 +38,7 @@ public class DateTimeTest {
 		};
 
 		SimpleDateFormat formatter = new SimpleDateFormat(DateTimeConverter.ISO_8601_DATE_FORMAT_STRING);
-		CheckTask.assertTests(strs, expected, (str, idx) -> {
+		CheckTask.assertTests(strs, expected, (String str, Integer idx) -> {
 			try {
 				ZonedDateTime zdt = ZonedDateTime.ofInstant(formatter.parse(str).toInstant(), zone);
 				System.out.println(zdt + " | " + expected[idx]);
