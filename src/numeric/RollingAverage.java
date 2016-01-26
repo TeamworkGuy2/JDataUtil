@@ -16,7 +16,7 @@ public final class RollingAverage {
 	 * @param newValueWeight the weight between {@code [0, 1.0]} of newly added values
 	 * @return the new sliding average
 	 */
-	public static final double updateSlidingAvg(float average, int newValue, float newValueWeight) {
+	public static final double updateAvg(float average, int newValue, float newValueWeight) {
 		float diff = (newValue - average);
 		return (average * (1 - newValueWeight)) + (diff * newValueWeight);
 	}
@@ -28,7 +28,7 @@ public final class RollingAverage {
 	 * @param newValueWeight the weight between {@code [0, 1.0]} of newly added values
 	 * @return the new sliding average
 	 */
-	public static final double updateSlidingAvg(float average, float newValue, float newValueWeight) {
+	public static final double updateAvg(float average, float newValue, float newValueWeight) {
 		float diff = (newValue - average);
 		return (average * (1 - newValueWeight)) + (diff * newValueWeight);
 	}
@@ -40,7 +40,7 @@ public final class RollingAverage {
 	 * @param newValueWeight the weight between {@code [0, 1.0]} of newly added values
 	 * @return the new sliding average
 	 */
-	public static final double updateSlidingAvg(double average, long newValue, double newValueWeight) {
+	public static final double updateAvg(double average, long newValue, double newValueWeight) {
 		double diff = (newValue - average);
 		return (average * (1 - newValueWeight)) + (diff * newValueWeight);
 	}
@@ -52,7 +52,7 @@ public final class RollingAverage {
 	 * @param newValueWeight the weight between {@code [0, 1.0]} of newly added values
 	 * @return the new sliding average
 	 */
-	public static final double updateSlidingAvg(double average, double newValue, double newValueWeight) {
+	public static final double updateAvg(double average, double newValue, double newValueWeight) {
 		double diff = (newValue - average);
 		return (average * (1 - newValueWeight)) + (diff * newValueWeight);
 	}

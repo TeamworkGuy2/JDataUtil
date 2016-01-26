@@ -51,14 +51,20 @@ public final class HashValueFactory {
 	 * @throws IOException if there is an error reading the file or calculating the hash
 	 */
 	public byte[] createFileHash(File file) throws IOException {
-		final int len = BUFFER_SIZE;
 		InputStream in = new FileInputStream(file);
+		byte[] hash = createStreamHash(in);
+		in.close();
+		return hash;
+	}
+
+
+	public byte[] createStreamHash(InputStream in) throws IOException {
+		final int len = BUFFER_SIZE;
 		byte[] b = new byte[len];
 		int readNum = -1;
 		while((readNum = in.read(b, 0, len)) > 0) {
 			digest.update(b, 0, readNum);
 		}
-		in.close();
 		byte[] hash = digest.digest();
 		return hash;
 	}
