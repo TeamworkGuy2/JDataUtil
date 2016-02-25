@@ -1,11 +1,11 @@
-package test;
+package twg2.dataUtil.test;
 
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import dataUtils.TimeUnitUtil;
+import twg2.dataUtil.dataUtils.TimeUnitUtil;
 
 /**
  * @author TeamworkGuy2

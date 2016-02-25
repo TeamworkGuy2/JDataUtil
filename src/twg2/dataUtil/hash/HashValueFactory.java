@@ -1,4 +1,4 @@
-package hash;
+package twg2.dataUtil.hash;
 
 import java.io.File;
 import java.io.FileInputStream;

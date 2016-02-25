@@ -1,4 +1,4 @@
-package test;
+package twg2.dataUtil.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +10,9 @@ import java.util.function.Function;
 import org.junit.Assert;
 import org.junit.Test;
 
+import twg2.dataUtil.dataUtils.ParallelWork;
+import twg2.dataUtil.dataUtils.ParallelWork.WorkBlockPolicy;
 import checks.CheckCollections;
-import dataUtils.ParallelWork;
-import dataUtils.ParallelWork.WorkBlockPolicy;
 
 /**
  * @author TeamworkGuy2

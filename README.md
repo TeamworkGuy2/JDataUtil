@@ -1,6 +1,6 @@
 JavaMortar
 ==========
-version: 0.1.0
+version: 0.2.0
 
 Utility classes that don't fit into other JCollectionExtensions, JCollectionFiller, JPrimitiveCollection, JTextFluff, JFunc, JStreamish, JTextParser, etc. 
 Includes DateTime and TimeUnit helpers, common Enum operations, some simple hash generators for java.security.MessageDigest, and a few other minor helpers.

@@ -1,4 +1,4 @@
-package dataUtils;
+package twg2.dataUtil.dataUtils;
 
 import java.util.concurrent.TimeUnit;
 

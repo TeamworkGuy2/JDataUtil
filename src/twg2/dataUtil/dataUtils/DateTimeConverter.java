@@ -1,11 +1,10 @@
-package dataUtils;
+package twg2.dataUtil.dataUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -118,29 +117,6 @@ public final class DateTimeConverter {
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-
-	/** Convert a calendar date into a string as specified by http://tools.ietf.org/html/rfc822#section-5.1
-	 * @param date the calendar instance to convert to a string
-	 * @param locale the locale to use when outputting strings such as a day of the week, or month of the year.
-	 * @return a string in the format: "day_abbreviation, day_of_month month_abbreviation year hour:minute:second GMT"
-	 */
-	// package-private - unused
-	static final String convertDateToStringRfc822(Calendar date, Locale locale) {
-		Date a = Date.from(Instant.now());
-		a.toString();
-		int day = date.get(Calendar.DAY_OF_MONTH);
-		int hour = date.get(Calendar.HOUR_OF_DAY);
-		int minute = date.get(Calendar.MINUTE);
-		int second = date.get(Calendar.SECOND);
-		String str = date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, locale) + ", " +
-				(day < 10 ? "0"+day : day) + " " +
-				date.getDisplayName(Calendar.MONTH, Calendar.SHORT, locale) + " " +
-				date.get(Calendar.YEAR) + " " +
-				(hour < 10 ? "0"+hour : hour) + ":" + (minute < 10 ? "0"+minute : minute) + ":" +
-				(second < 10 ? "0"+second : second) + " GMT";
-		return str;
 	}
 
 }

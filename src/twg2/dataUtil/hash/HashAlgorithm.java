@@ -1,4 +1,4 @@
-package hash;
+package twg2.dataUtil.hash;
 
 /** Common cryptographic hashing algorithms
  * @author TeamworkGuy2

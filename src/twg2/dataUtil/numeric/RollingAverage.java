@@ -1,4 +1,4 @@
-package numeric;
+package twg2.dataUtil.numeric;
 
 
 /** Utility methods for calculating rolling average values.

@@ -1,4 +1,4 @@
-package test;
+package twg2.dataUtil.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,10 +7,12 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
+import twg2.dataUtil.dataUtils.DateTimeConverter;
 import checks.CheckTask;
-import dataUtils.DateTimeConverter;
 
 /**
  * @author TeamworkGuy2
