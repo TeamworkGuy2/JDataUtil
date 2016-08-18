@@ -1,4 +1,4 @@
-package twg2.dataUtil.dataUtils;
+package twg2.dataUtil.dateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

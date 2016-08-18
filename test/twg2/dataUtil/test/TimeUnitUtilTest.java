@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.Test;
 
-import twg2.dataUtil.dataUtils.TimeUnitUtil;
+import twg2.dataUtil.dateTime.TimeUnitUtil;
 
 /**
  * @author TeamworkGuy2

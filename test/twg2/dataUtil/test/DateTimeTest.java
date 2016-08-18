@@ -11,7 +11,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import twg2.dataUtil.dataUtils.DateTimeConverter;
+import twg2.dataUtil.dateTime.DateTimeConverter;
 import checks.CheckTask;
 
 /**

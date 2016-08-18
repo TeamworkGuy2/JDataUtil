@@ -4,9 +4,9 @@ package twg2.dataUtil.dataUtils;
  * @author TeamworkGuy2
  * @since 2015-9-0
  */
-public final class EnumUtil {
+public final class EnumError {
 
-	private EnumUtil() { throw new AssertionError("cannot instantiate static class EnumUtil"); }
+	private EnumError() { throw new AssertionError("cannot instantiate static class EnumUtil"); }
 
 
 	public static final <E extends Enum<E>> IllegalArgumentException unknownValue(E value) {
