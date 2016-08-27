@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-###[0.3.0](N/A) - 2016-08-18
+###[0.4.0](N/A) - 2016-08-27
+####Removed
+* Removed twg2.dataUtil.dateTime package (moved to new JDateTimes project)
+
+
+--------
+###[0.3.0](https://github.com/TeamworkGuy2/JavaMortar/commit/428e34f2a4eb750062b78c73b32c563fa0b35d0a) - 2016-08-18
 ####Changed
 * Moved DateTimeConverter and TimeUnitUtil to new twg2.dataUtil.dateTime package
 * Renamed EnumUtil -> EnumError

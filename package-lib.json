@@ -1,8 +1,8 @@
 {
-	"version" : "0.3.0",
+	"version" : "0.4.0",
 	"name" : "java-mortar",
 	"description" : "Boilerplate code commonly used in small Java applications. Includes array searching and aggregation, primitive/tri/quad Functions, string searching, splitting, and replacing, char conditions and ranges, and builders for maps, lists, etc...",
-	"homepage" : "https://github.com/TeamworkGuy2/JavaMortar",
+	"homepage" : "https://github.com/TeamworkGuy2/JDataUtil",
 	"license" : "MIT",
 	"main" : "./bin/jdata_util.jar",
 	"dependencies" : {
