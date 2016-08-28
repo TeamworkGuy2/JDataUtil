@@ -1,6 +1,6 @@
 {
-	"version" : "0.4.0",
-	"name" : "java-mortar",
+	"version" : "0.4.1",
+	"name" : "jdata-util",
 	"description" : "Boilerplate code commonly used in small Java applications. Includes array searching and aggregation, primitive/tri/quad Functions, string searching, splitting, and replacing, char conditions and ranges, and builders for maps, lists, etc...",
 	"homepage" : "https://github.com/TeamworkGuy2/JDataUtil",
 	"license" : "MIT",
